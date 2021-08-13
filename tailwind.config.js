@@ -3,7 +3,11 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: theme => ({
+       'home': "url('/bghome.jpg')",
+      }),
+    },
     screens: {
       'xs': '350px',
       // => @media (max-width: 640px) { ... }
