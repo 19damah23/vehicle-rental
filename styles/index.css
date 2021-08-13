@@ -1,0 +1,12 @@
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+.fontPlayfair {
+  font-family: 'Playfair Display', serif;
+}
+
+hr.home {
+  width: 38px;
+  border: 2px solid;
+}
