@@ -1,6 +1,9 @@
 import Dropdown from "../../components/Dropdown"
 import Navbar from "../../components/Navbar"
 import Image from "next/image"
+import Star from "../../components/Star"
+import Card from "../../components/Card"
+import Footer from "../../components/Footer"
 
 const Home = () => {
 
@@ -44,34 +47,10 @@ const Home = () => {
         </div>
 
         <div className="flex justify-between mt-12">
-          <div className="relative">
-            <Image src="/img1.png" alt="img" width="275px" height="337px" className="rounded-md" />
-            <div className="block absolute bottom-0 left-0 bg-white px-2 py-2 w-44 rounded-r-md">
-              <p className="font-semibold text-lg">Merapi</p>
-              <span className="text-gray-400 text-sm">Yogyakarta</span>
-            </div>
-          </div>
-          <div className="relative">
-            <Image src="/img2.png" alt="img" width="275px" height="337px" className="rounded-md" />
-            <div className="block absolute bottom-0 left-0 bg-white px-2 py-2 w-44 rounded-r-md">
-              <p className="font-semibold text-lg">Teluk Bogam</p>
-              <span className="text-gray-400 text-sm">Kalimantan</span>
-            </div>
-          </div>
-          <div className="relative">
-            <Image src="/img3.png" alt="img" width="275px" height="337px" className="rounded-md" />
-            <div className="block absolute bottom-0 left-0 bg-white px-2 py-2 w-44 rounded-r-md">
-              <p className="font-semibold text-lg">Bromo</p>
-              <span className="text-gray-400 text-sm">Malang</span>
-            </div>
-          </div>
-          <div className="relative">
-            <Image src="/img4.png" alt="img" width="275px" height="337px" className="rounded-md" />
-            <div className="block absolute bottom-0 left-0 bg-white px-2 py-2 w-44 rounded-r-md">
-              <p className="font-semibold text-lg">Malioboro</p>
-              <span className="text-gray-400 text-sm">Yogyakarta</span>
-            </div>
-          </div>
+          <Card name="Merapi" location="Yogyakarta" img="/img1.png" />
+          <Card name="Teluk Bogam" location="Kalimantan" img="/img2.png" />
+          <Card name="Bromo" location="Malang" img="/img3.png" />
+          <Card name="Malioboro" location="Yogyakarta" img="/img4.png" />
         </div>
       </div>
 
@@ -81,21 +60,11 @@ const Home = () => {
         <div className="flex">
           <div className="w-1/2 flex flex-col justify-center">
             <div className="flex items-center">
-              <div className="mr-4">
-                <Image src="/star.png" alt="star" width="25px" height="25px" />
-              </div>
-              <div className="mr-4">
-                <Image src="/star.png" alt="star" width="25px" height="25px" />
-              </div>
-              <div className="mr-4">
-                <Image src="/star.png" alt="star" width="25px" height="25px" />
-              </div>
-              <div className="mr-4">
-                <Image src="/star.png" alt="star" width="25px" height="25px" />
-              </div>
-              <div className="mr-4">
-                <Image src="/star.png" alt="star" width="25px" height="25px" />
-              </div>
+              <Star />
+              <Star />
+              <Star />
+              <Star />
+              <Star />
             </div>
             <p className="text-3xl text-gray-400 pr-10 mt-7 mb-10">”It was the right decision to rent vehicle here, I spent less money and enjoy the trip. It was an amazing experience to have a ride for wildlife trip!”</p>
             <h3 className="font-bold text-2xl">Edward Newgate</h3>
@@ -111,69 +80,7 @@ const Home = () => {
         </div>
       </div>
 
-      <footer className="bg-gray-100">
-        <div className="xs:container sm:container md:container lg:container xl:container mx-auto">
-          <div className="py-16 flex">
-            <div className="w-2/5">
-              <Image src="/logo2.png" alt="logo" width="42px" height="42px" />
-              <p className="text-gray-400 font-base my-2 mb-12">Plan and book your perfect trip with<br/>
-                expert advice, travel tips for vehicle<br/>
-                information from us</p>
-              <p className="text-gray-400 font-base my-2">©2020 Vehicle Rental Center. All rights reserved</p>
-            </div>
-            <div className="w-1/5">
-              <h5 className="font-bold text-lg">Destinations</h5>
-              <ul>
-                <li className="list-none text-gray-400 font-base my-2">Bali</li>
-                <li className="list-none text-gray-400 font-base my-2">Yogyakarta</li>
-                <li className="list-none text-gray-400 font-base my-2">Jakarta</li>
-                <li className="list-none text-gray-400 font-base my-2">Kalimantan</li>
-                <li className="list-none text-gray-400 font-base my-2">Malang</li>
-              </ul>
-            </div>
-            <div className="w-1/5">
-              <h5 className="font-bold text-lg">Vehicle</h5>
-              <ul>
-                <li className="list-none text-gray-400 font-base my-2">Bike</li>
-                <li className="list-none text-gray-400 font-base my-2">Cars</li>
-                <li className="list-none text-gray-400 font-base my-2">Motorbike</li>
-                <li className="list-none text-gray-400 font-base my-2">Return Times</li>
-                <li className="list-none text-gray-400 font-base my-2">FAQs</li>
-              </ul>
-            </div>
-            <div className="w-1/5">
-              <h5 className="font-bold text-lg">Vehicle</h5>
-              <ul>
-                <li className="list-none text-gray-400 font-base my-2">Adventure Travel</li>
-                <li className="list-none text-gray-400 font-base my-2">Art And Culture</li>
-                <li className="list-none text-gray-400 font-base my-2">Wildlife And Nature</li>
-                <li className="list-none text-gray-400 font-base my-2">Family Holidays</li>
-                <li className="list-none text-gray-400 font-base my-2">Culinary Trip</li>
-              </ul>
-            </div>
-          </div>
-
-          <hr />
-
-          <div className="flex justify-center items-center h-20">
-            <div className="mx-4 cursor-pointer">
-              <Image src="/twitter.png" alt="twitter" width="30px" height="20px" />
-            </div>
-            <div className="mx-4 cursor-pointer">
-              <Image src="/fb.png" alt="fb" width="10px" height="20px" />
-            </div>
-            <div className="mx-4 cursor-pointer">
-              <Image src="/ig.png" alt="ig" width="20px" height="20px" />
-            </div>
-            <div className="mx-4 cursor-pointer">
-              <Image src="/linkedin.png" alt="linkedin" width="30px" height="20px" />
-            </div>
-            <div className="mx-4 cursor-pointer">
-              <Image src="/yt.png" alt="yt" width="30px" height="20px" />
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
