@@ -1,13 +1,23 @@
 import Footer from "../../../components/Footer"
 import Navbar from "../../../components/Navbar"
 import Image from "next/image"
+import Link from "next/link"
 
 const Vehicle = () => {
   return (
     <>
       <Navbar />
 
-      <div className="xs:container sm:container md:container lg:container xl:container mx-auto pt-20 flex flex-col lg:flex-row">
+      <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-12 flex">
+        <Link href="">
+          <a>
+            <Image src="/prev.png" alt="back" width="24px" height="40px" />
+          </a>
+        </Link>
+        <h3 className="font-bold text-4xl ml-14">Reservation</h3>
+      </div>
+
+      <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-16 flex flex-col lg:flex-row">
         <div className="w-full lg:w-2/3 mx-auto">
           <Image src="/img17.png" alt="bike" width="696px" height="616px" />
         </div>
