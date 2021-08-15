@@ -6,8 +6,8 @@ const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false)
 
   return (
-    <div className="xs:container sm:container md:container lg:container xl:container mx-auto">
-      <nav className="flex flex-col lg:flex-row justify-between items-center sm:h-20 md:h-28 lg:h-28">
+    <nav className="sm:h-20 md:h-28 lg:h-28 fixed bg-white z-10 w-full top-0 py-2 flex items-center">
+      <div className="xs:container sm:container md:container lg:container xl:container mx-auto flex flex-col lg:flex-row justify-between items-center">
         <div className="flex flex-row justify-between items-center w-full lg:w-auto border-b lg:border-b-0">
           <div>
             <Link href="/">
@@ -30,7 +30,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className={`${isMobile === true ? 'block' : 'hidden'} lg:block ml-auto`}>
+        <div className={`${isMobile === true ? 'block' : 'hidden'} lg:block ml-auto z-10`}>
           <ul className="flex flex-col lg:flex-row justify-between items-center">
             <li className="mt-5 lg:mt-0 lg:mr-8 text-gray-600 hover:text-black focus:text-black text-base">
               <Link href="/">
@@ -64,8 +64,8 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   );
 }
 

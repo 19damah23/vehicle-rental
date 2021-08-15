@@ -9,7 +9,7 @@ const Payment = () => {
     <>
       <Navbar />
 
-      <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-8 lg:mt-12 flex">
+      <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-8 lg:mt-12 flex pt-16 lg:pt-28">
         <Link href="" className="w-3.5 h-7">
           <a className="w-4 h-8 lg:w-6 lg:h-10">
             <Image src="/prev.png" alt="back" width="24px" height="40px" />

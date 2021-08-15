@@ -1,5 +1,8 @@
 body {
   font-family: 'Nunito', sans-serif;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .fontPlayfair {

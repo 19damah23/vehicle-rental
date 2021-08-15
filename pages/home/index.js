@@ -10,11 +10,11 @@ const Home = () => {
   const item = ['satu', 'dua', 'tiga', 'empat']
 
   return (
-    <div>
+    <>
       <Navbar />
 
-      <div className="bg-home bg-cover bg-center">
-        <div className="xs:container sm:container md:container lg:container xl:container mx-auto py-20">
+      <div className="bg-home bg-cover bg-center py-20 w-full">
+        <div className="xs:container sm:container md:container lg:container xl:container">
           <h1 className="font-bold fontPlayfair text-6xl text-white font-Playfair">Explore and <br />Travel</h1>
 
           <h5 className="text-white text-2xl mt-20">Vehicle Finder</h5>
@@ -81,7 +81,7 @@ const Home = () => {
       </div>
 
       <Footer />
-    </div>
+    </>
   );
 }
 

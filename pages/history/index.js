@@ -13,7 +13,7 @@ const History = () => {
     <>
       <Navbar />
 
-      <div className="xs:container sm:container md:container lg:container xl:container mx-auto flex flex-col lg:flex-row my-6">
+      <div className="xs:container sm:container md:container lg:container xl:container mx-auto flex flex-col lg:flex-row my-6 pt-16 lg:pt-28">
         <div className="w-full lg:w-3/4 mr-10">
           <div className="flex flex-row items-center">
             <div className="relative mr-4 lg:mr-9 w-full">
