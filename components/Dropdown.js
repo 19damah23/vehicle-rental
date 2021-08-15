@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-const Dropdown = ({ list, giveClass }) => {
+const Dropdown = ({ list, giveClass, classBody, classList }) => {
   const [show, setShow] = useState(false)
   const [selected, setSelected] = useState(list[0])
 
   return (
     <div className={`relative ${giveClass}`}>
-      <button className="text-black bg-white opacity-25 w-48 h-9 border flex flex-row justify-between items-center rounded pl-1" onClick={() => setShow(!show)}>
+      <button className={`text-black bg-white opacity-25 w-48 h-9 border flex flex-row justify-between items-center rounded pl-1 ${classBody ? classBody : ''}`} onClick={() => setShow(!show)}>
         <p>{selected}</p>
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           {!show ? (
@@ -17,9 +17,9 @@ const Dropdown = ({ list, giveClass }) => {
         </svg>
       </button>
 
-      <div className={`${show ? 'block' : 'hidden'} absolute z-10 w-48 bg-white py-2 rounded-lg mt-2 shadow-md`}>
-        {list && list.map((item) => (
-          <li onClick={() => setSelected(item, setShow(!show))} className="list-none px-4 py-2 hover:bg-indigo-500 hover:text-white">
+      <div className={`${show ? 'block' : 'hidden'} absolute z-10 w-48 bg-white py-2 rounded-lg mt-2 shadow-md ${classList ? classList : ''}`}>
+        {list && list.map((item, index) => (
+          <li onClick={() => setSelected(item, setShow(!show))} className="list-none px-4 py-2 hover:bg-indigo-500 hover:text-white" key={index}>
             <a>{item}</a>
           </li>
         ))}

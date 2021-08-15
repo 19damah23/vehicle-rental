@@ -16,21 +16,21 @@ const Footer = () => {
   return (
     <footer className="bg-gray-100">
       <div className="xs:container sm:container md:container lg:container xl:container mx-auto">
-        <div className="py-16 flex">
-          <div className="w-2/5">
+        <div className="py-16 flex justify-between flex-wrap">
+          <div className="xs:w-1/2 sm:w-1/2 md:w-2/5 lg:w-2/5">
             <Image src="/logo2.png" alt="logo" width="42px" height="42px" />
-            <p className="text-gray-400 font-base my-2 mb-12">Plan and book your perfect trip with<br />
+            <p className="text-gray-400 font-base text-xs md:text-sm lg:text-base my-2 mb-12">Plan and book your perfect trip with<br />
               expert advice, travel tips for vehicle<br />
               information from us</p>
-            <p className="text-gray-400 font-base my-2">©2020 Vehicle Rental Center. All rights reserved</p>
+            <p className="text-gray-400 font-base text-xs md:text-sm lg:text-base my-2">©2020 Vehicle Rental Center. All rights reserved</p>
           </div>
-          <div className="w-1/5">
+          <div className="xs:w-1/2 sm:w-1/2 md:w-1/5 lg:w-1/5">
             <ListWithTitle title="Destinations" list={listDestinations} />
           </div>
-          <div className="w-1/5">
+          <div className="xs:w-1/2 sm:w-1/2 md:w-1/5 lg:w-1/5">
             <ListWithTitle title="Vehicle" list={listVehicles} />
           </div>
-          <div className="w-1/5">
+          <div className="xs:w-1/2 sm:w-1/2 md:w-1/5 lg:w-1/5">
             <ListWithTitle title="Interests" list={listInterests} />
           </div>
         </div>
