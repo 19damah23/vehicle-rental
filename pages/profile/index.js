@@ -26,25 +26,25 @@ const Profile = () => {
         <div className="flex justify-center mt-5 lg:mt-10">
           <div className="mx-10 lg:mx-20 flex items-center">
             <input type="radio" id="male" name="gender" value="male" className="w-4 h-4 lg:w-7 lg:h-7" />
-            <label for="male" className="ml-2 lgml-5 text-lg lg:text-2xl">Male</label>
+            <label htmlFor="male" className="ml-2 lgml-5 text-lg lg:text-2xl">Male</label>
           </div>
           <div className="mx-10 lg:mx-20 flex items-center">
             <input type="radio" id="female" name="gender" value="female" className="w-4 h-4 lg:w-7 lg:h-7" />
-            <label for="female" className="ml-2 lgml-5 text-lg lg:text-2xl">Female</label>
+            <label htmlFor="female" className="ml-2 lgml-5 text-lg lg:text-2xl">Female</label>
           </div>
         </div>
         <div className="flex flex-col mt-12 lg:mt-20">
           <div className="flex flex-col">
-            <label for="email" className="text-gray-400 text-lg lg:text-2xl">Email address :</label>
-            <input id="email" type="text" name="email" placeholder="Email address" className="py-2 lg:py-4 py-5 border-b focus:outline-none bg-white border-black text-black text-lg lg:text-2xl" />
+            <label htmlFor="email" className="text-gray-400 text-lg lg:text-2xl">Email address :</label>
+            <input id="email" type="text" name="email" placeholder="Email address" className="py-2 lg:py-4 border-b focus:outline-none bg-white border-black text-black text-lg lg:text-2xl" />
           </div>
           <div className="flex flex-col mt-4">
-            <label for="address" className="text-gray-400 text-lg lg:text-2xl">Address :</label>
-            <input id="address" type="text" name="email" placeholder="Address" className="py-2 lg:py-4 py-5 border-b focus:outline-none bg-white border-black text-black text-lg lg:text-2xl" />
+            <label htmlFor="address" className="text-gray-400 text-lg lg:text-2xl">Address :</label>
+            <input id="address" type="text" name="email" placeholder="Address" className="py-2 lg:py-4 border-b focus:outline-none bg-white border-black text-black text-lg lg:text-2xl" />
           </div>
           <div className="flex flex-col mt-4">
-            <label for="phone" className="text-gray-400 text-lg lg:text-2xl">Mobile number :</label>
-            <input id="phone" type="text" name="email" placeholder="Mobile number" className="py-2 lg:py-4 py-5 border-b focus:outline-none bg-white border-black text-black text-lg lg:text-2xl" />
+            <label htmlFor="phone" className="text-gray-400 text-lg lg:text-2xl">Mobile number :</label>
+            <input id="phone" type="text" name="email" placeholder="Mobile number" className="py-2 lg:py-4 border-b focus:outline-none bg-white border-black text-black text-lg lg:text-2xl" />
           </div>
         </div>
 
@@ -52,12 +52,12 @@ const Profile = () => {
           <h3 className="text-2xl font-extrabold">Identity</h3>
           <di className="flex justify-between">
             <div className="flex flex-col mt-4 w-1/2 pr-4 lg:pr-9">
-              <label for="name" className="text-gray-400 text-lg lg:text-2xl">Display name :</label>
-              <input id="name" type="text" name="name" placeholder="Mobile number" className="py-2 lg:py-4 py-5 border-b focus:outline-none bg-white border-black text-black text-lg lg:text-2xl" />
+              <label htmlFor="name" className="text-gray-400 text-lg lg:text-2xl">Display name :</label>
+              <input id="name" type="text" name="name" placeholder="Mobile number" className="py-2 lg:py-4 border-b focus:outline-none bg-white border-black text-black text-lg lg:text-2xl" />
             </div>
             <div className="flex flex-col mt-4 w-1/2 pl-4 lg:pl-9">
-              <label for="birth" className="text-gray-400 text-lg lg:text-2xl">DD/MM/YYYY</label>
-              <input id="birth" type="date" name="birth" placeholder="Mobile number" className="py-2 lg:py-4 py-5 border-b focus:outline-none bg-white border-black text-black text-lg lg:text-2xl" />
+              <label htmlFor="birth" className="text-gray-400 text-lg lg:text-2xl">DD/MM/YYYY</label>
+              <input id="birth" type="date" name="birth" placeholder="Mobile number" className="py-2 lg:py-4 border-b focus:outline-none bg-white border-black text-black text-lg lg:text-2xl" />
             </div>
           </di>
         </div>
