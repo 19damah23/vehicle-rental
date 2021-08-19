@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const Dropdown = ({ list, classSelect, title, titleClass, handleChange, name, id }) => {
 
   return (

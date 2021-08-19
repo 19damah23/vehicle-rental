@@ -3,9 +3,10 @@ import Image from "next/image"
 import Footer from "../../../components/Footer"
 import Dropdown from "../../../components/Dropdown"
 import { useEffect, useState } from "react"
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import axios from "axios"
 import backendApi from "../../api/backendApi"
+import Link from "next/link"
 
 const EditVehicle = () => {
   const { query } = useRouter()
@@ -97,14 +98,14 @@ const EditVehicle = () => {
       };
     }
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgxNjlkZDFlMGQwOTRmMDI4ZjMwZGVlZGM1OWJiNjY5IiwibmFtZSI6Ik11Y2hhbWFkIEFndXMgSGVybWF3YW4iLCJlbWFpbCI6Im11Y2hhbWFkYWd1c2hAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicGhvbmUiOm51bGwsImF2YXRhciI6bnVsbCwiZ2VuZGVyIjpudWxsLCJleHAiOjE2MjkzMTA1MDUsImlhdCI6MTYyOTMwNjkwNX0.5_zv6rcBCdwd4ipil1OpS92gWH-VSQ2GRIe6vC6RToA'
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgxNjlkZDFlMGQwOTRmMDI4ZjMwZGVlZGM1OWJiNjY5IiwibmFtZSI6Ik11Y2hhbWFkIEFndXMgSGVybWF3YW4iLCJlbWFpbCI6Im11Y2hhbWFkYWd1c2hAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicGhvbmUiOm51bGwsImF2YXRhciI6bnVsbCwiZ2VuZGVyIjpudWxsLCJleHAiOjE2MjkzMzU1MDEsImlhdCI6MTYyOTMzMTkwMX0.kRmH9V8HVOKVr-VNrz8-CQzanrx7pcNdi9MbSL0zQKE'
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
 
     backendApi.patch(`vehicles/${id}`, data, config)
     .then((res) => {
-      alert(res.data.message)
+      Router.push(`/admin/vehicle`)
     })
     .catch((error) => {
       alert(error.response.data.message)
@@ -112,17 +113,17 @@ const EditVehicle = () => {
   };
 
   const handleDelete = (id) => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgxNjlkZDFlMGQwOTRmMDI4ZjMwZGVlZGM1OWJiNjY5IiwibmFtZSI6Ik11Y2hhbWFkIEFndXMgSGVybWF3YW4iLCJlbWFpbCI6Im11Y2hhbWFkYWd1c2hAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicGhvbmUiOm51bGwsImF2YXRhciI6bnVsbCwiZ2VuZGVyIjpudWxsLCJleHAiOjE2MjkzMTA1MDUsImlhdCI6MTYyOTMwNjkwNX0.5_zv6rcBCdwd4ipil1OpS92gWH-VSQ2GRIe6vC6RToA'
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgxNjlkZDFlMGQwOTRmMDI4ZjMwZGVlZGM1OWJiNjY5IiwibmFtZSI6Ik11Y2hhbWFkIEFndXMgSGVybWF3YW4iLCJlbWFpbCI6Im11Y2hhbWFkYWd1c2hAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicGhvbmUiOm51bGwsImF2YXRhciI6bnVsbCwiZ2VuZGVyIjpudWxsLCJleHAiOjE2MjkzMzU1MDEsImlhdCI6MTYyOTMzMTkwMX0.kRmH9V8HVOKVr-VNrz8-CQzanrx7pcNdi9MbSL0zQKE'
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
 
     backendApi.delete(`vehicles/${id}`, config)
     .then((res) => {
-      alert(res)
+      Router.push(`/admin/vehicle`)
     })
     .catch((error) => {
-      alert(error)
+      alert(error.response.data.message)
     })
   }
 
@@ -132,9 +133,9 @@ const EditVehicle = () => {
 
       <div className="xs:container sm:container md:container lg:container xl:container mx-auto flex flex-col py-20 lg:pt-32 lg:pb-24">
         <div className="flex items-center">
-          <button type="button" className="w-5 h-10 lg:w-7 lg:h-12">
+          <Link href="/admin/vehicle" type="button" className="w-5 h-10 lg:w-7 lg:h-12">
             <Image src="/prev.png" alt="back" width="28px" height="48px" />
-          </button>
+          </Link>
           <h3 className="text-xl lg:text-4xl font-bold ml-12 lg:ml-20">Add new item</h3>
         </div>
 

@@ -4,6 +4,7 @@ import Footer from "../../../components/Footer"
 import Dropdown from "../../../components/Dropdown"
 import { useState } from "react"
 import backendApi from "../../api/backendApi"
+import Router from "next/router";
 
 const AddVehicle = () => {
   const [stock, setStock] = useState(1)
@@ -47,12 +48,18 @@ const AddVehicle = () => {
       data.append('images', files[i])
     };
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgxNjlkZDFlMGQwOTRmMDI4ZjMwZGVlZGM1OWJiNjY5IiwibmFtZSI6Ik11Y2hhbWFkIEFndXMgSGVybWF3YW4iLCJlbWFpbCI6Im11Y2hhbWFkYWd1c2hAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicGhvbmUiOm51bGwsImF2YXRhciI6bnVsbCwiZ2VuZGVyIjpudWxsLCJleHAiOjE2MjkyOTk3OTMsImlhdCI6MTYyOTI5NjE5M30.IXoTBWckqZ6zY0PXCkASZGs9LzVkDrYImv-p_2MUbP8'
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgxNjlkZDFlMGQwOTRmMDI4ZjMwZGVlZGM1OWJiNjY5IiwibmFtZSI6Ik11Y2hhbWFkIEFndXMgSGVybWF3YW4iLCJlbWFpbCI6Im11Y2hhbWFkYWd1c2hAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicGhvbmUiOm51bGwsImF2YXRhciI6bnVsbCwiZ2VuZGVyIjpudWxsLCJleHAiOjE2MjkzNDM3NTAsImlhdCI6MTYyOTM0MDE1MH0.3zaKvvyX7OgBhhKm0tlnKYFyoPOnPYmvYENAErcmEec'
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
 
     await backendApi.post(`vehicles/add`, data, config)
+    .then((res) => {
+      Router.push(`/admin/vehicle`)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   };
 
   return (

@@ -8,9 +8,9 @@ const Vehicle = () => {
     <>
       <Navbar />
 
-      <div className="xs:container sm:container md:container lg:container xl:container mx-auto pt-20 relative">
+      <div className="xs:container sm:container md:container lg:container xl:container mx-auto pt-20 lg:pt-40 relative">
         <input type="text" name="search" placeholder="Search vehicle (ex. cars, cars name)" className="w-full h-16 border border-gray-400 px-6 text-gray-400 focus:outline-none rounded-md" />
-        <div className="absolute right-6 top-24">
+        <div className="absolute right-6 top-24 lg:top-44">
           <Image src="/search.png" alt="search" width="30px" height="30px" />
         </div>
       </div>

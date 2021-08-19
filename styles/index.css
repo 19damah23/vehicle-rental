@@ -13,3 +13,20 @@ hr.home {
   width: 38px;
   border: 2px solid;
 }
+
+ul.pagination {
+  display: flex;
+  margin-top: 1rem;
+}
+
+ul.pagination li {
+  margin: 2px;
+  padding: 2px 4px;
+  border: 1px solid gainsboro;
+}
+
+ul.pagination li.active {
+  background-color: #0057ff;
+  font-weight: 700;
+  color: #fff;
+}

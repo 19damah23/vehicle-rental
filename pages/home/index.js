@@ -5,6 +5,7 @@ import Star from "../../components/Star"
 import Card from "../../components/Card"
 import Footer from "../../components/Footer"
 import Link from "next/link"
+import Router from "next/router";
 
 const Home = ({ data }) => {
   const item = ['satu', 'dua', 'tiga', 'empat']
@@ -22,13 +23,13 @@ const Home = ({ data }) => {
           <hr className="home mt-4 text-white mb-12" />
 
           <div>
-            <div className="flex flex-col lg:flex-row">
-              <Dropdown list={item} giveClass="mr-7" classBody="w-36 lg:w-48 pl-4 py-1 lg:py-2 text-black rounded-md bg-white opacity-50" classSelect="text-sm lg:text-base" />
-              <Dropdown list={item} giveClass="mr-7 mt-4 lg:mt-0" classBody="w-36 lg:w-48 pl-4 py-1 lg:py-2 text-black rounded-md bg-white opacity-50" classSelect="text-sm lg:text-base" />
+            <div className="flex">
+              <Dropdown list={item} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-black opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-12" />
+              <Dropdown list={item} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-black opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-12" />
             </div>
-            <div className="flex flex-col lg:flex-row mt-4 lg:mt-8">
-              <Dropdown list={item} giveClass="mr-7" classBody="w-36 lg:w-48 pl-4 py-1 lg:py-2 text-black rounded-md bg-white opacity-50" classSelect="text-sm lg:text-base" />
-              <Dropdown list={item} giveClass="mr-7 mt-4 lg:mt-0" classBody="w-36 lg:w-48 pl-4 py-1 lg:py-2 text-black rounded-md bg-white opacity-50" classSelect="text-sm lg:text-base" />
+            <div className="flex mt-4 lg:mt-8">
+              <Dropdown list={item} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-black opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-12" />
+              <Dropdown list={item} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-black opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-12" />
             </div>
           </div>
 
@@ -39,7 +40,7 @@ const Home = ({ data }) => {
       <div className="container mx-auto py-10 lg:py-20">
         <div className="flex justify-between">
           <h3 className="font-bold text-xl lg:text-4xl fontPlayfair">Popular in town</h3>
-          <Link href={`/vehicle/popular`}>
+          <Link href={`/admin/vehicle`}>
             <a className="flex items-center text-yellow-400 text-xs lg:text-base">
               Show all <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -51,7 +52,7 @@ const Home = ({ data }) => {
         <div className="flex mt-8 w-full flex-wrap">
           {data && data.map((item, index) => (
             <Link href={`/vehicle/${item.name}/${item.id}`}>
-              <a>
+              <a className="mx-3 lg:mx-3">
                 <Card name={item.name} location={item.location} img={`http://localhost:8080/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
               </a>
             </Link>
