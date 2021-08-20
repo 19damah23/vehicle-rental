@@ -8,6 +8,7 @@ module.exports = {
        'home': "url('/bghome.jpg')",
        'login': "url('/login.png')",
        'register': "url('/register.png')",
+       'forgot': "url('/forgot.png')",
       }),
     },
     screens: {
