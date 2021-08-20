@@ -38,12 +38,12 @@ const Vehicle = ({ data }) => {
         </div>
       </div>
 
-      {query.length > 0 ? searchData.map((item, index) => (
+      {query.length > 0 ? (
         <div className="xs:container sm:container md:container lg:container xl:container mx-auto pt-20">
           <div className="flex justify-between">
-            <h3 className="font-bold text-4xl fontPlayfair">Popular in town</h3>
+            <h3 className="font-bold text-xl lg:text-4xl fontPlayfair">Popular in town</h3>
             <Link href="/admin/vehicle/popular" className="text-yellow-400 flex items-center">
-              <a className="text-yellow-400 flex items-center flex">
+              <a className="text-yellow-400 flex items-center">
                 Show all <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                 </svg>
@@ -51,21 +51,23 @@ const Vehicle = ({ data }) => {
             </Link>
           </div>
 
-          <div className="flex mt-8 w-full flex-wrap">
-            <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
-              <a className="mr-4">
-                <Card name={item.name} location={item.location} img={`http://localhost:8080/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
-              </a>
-            </Link>
-          </div>
+            <div className="flex mt-8 mb-10 w-full flex-wrap">
+          {searchData.map((item, index) =>
+              <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
+                <a className="mr-4">
+                  <Card name={item.name} location={item.location} img={`http://localhost:8080/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
+                </a>
+              </Link>
+          )}
+            </div>
         </div>
-      )) : (
+      ) : (
         <div>
           <div className="xs:container sm:container md:container lg:container xl:container mx-auto pt-20">
             <div className="flex justify-between">
               <h3 className="font-bold text-4xl fontPlayfair">Popular in town</h3>
               <Link href="/admin/vehicle/popular" className="text-yellow-400 flex items-center">
-                <a className="text-yellow-400 flex items-center flex">
+                <a className="text-yellow-400 flex items-center">
                   Show all <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
@@ -76,7 +78,7 @@ const Vehicle = ({ data }) => {
             <div className="flex mt-8 w-full flex-wrap">
               {data && data.map((item, index) => (
                 <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
-                  <a className="mx-auto lg:mx-2">
+                  <a className="mx-3 lg:mx-1">
                     <Card name={item.name} location={item.location} img={`http://localhost:8080/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
                   </a>
                 </Link>
@@ -88,7 +90,7 @@ const Vehicle = ({ data }) => {
             <div className="flex justify-between">
               <h3 className="font-bold text-4xl fontPlayfair">Cars</h3>
               <Link href="/admin/vehicle/popular" className="text-yellow-400 flex items-center">
-                <a className="text-yellow-400 flex items-center flex">
+                <a className="text-yellow-400 flex items-center">
                   Show all <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
@@ -99,7 +101,7 @@ const Vehicle = ({ data }) => {
             <div className="flex mt-8 w-full flex-wrap">
               {data && data.map((item, index) => (
                 <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
-                  <a className="mx-auto lg:mx-2">
+                  <a className="mx-3 lg:mx-0 lg:mr-3">
                     <Card name={item.name} location={item.location} img={`http://localhost:8080/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
                   </a>
                 </Link>
@@ -111,7 +113,7 @@ const Vehicle = ({ data }) => {
             <div className="flex justify-between">
               <h3 className="font-bold text-4xl fontPlayfair">Motorbike</h3>
               <Link href="/admin/vehicle/popular" className="text-yellow-400 flex items-center">
-                <a className="text-yellow-400 flex items-center flex">
+                <a className="text-yellow-400 flex items-center">
                   Show all <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
@@ -122,7 +124,7 @@ const Vehicle = ({ data }) => {
             <div className="flex mt-8 w-full flex-wrap">
               {data && data.map((item, index) => (
                 <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
-                  <a className="mx-auto lg:mr-2">
+                  <a className="mx-3 lg:mx-0 lg:mr-3">
                     <Card name={item.name} location={item.location} img={`http://localhost:8080/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
                   </a>
                 </Link>
@@ -134,7 +136,7 @@ const Vehicle = ({ data }) => {
             <div className="flex justify-between">
               <h3 className="font-bold text-4xl fontPlayfair">Bike</h3>
               <Link href="/admin/vehicle/popular" className="text-yellow-400 flex items-center">
-                <a className="text-yellow-400 flex items-center flex">
+                <a className="text-yellow-400 flex items-center">
                   Show all <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
@@ -145,7 +147,7 @@ const Vehicle = ({ data }) => {
             <div className="flex mt-8 w-full flex-wrap">
               {data && data.map((item, index) => (
                 <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
-                  <a className="mx-auto lg:mx-2">
+                  <a className="mx-3 lg:mx-0 lg:mr-3">
                     <Card name={item.name} location={item.location} img={`http://localhost:8080/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
                   </a>
                 </Link>
