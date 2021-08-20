@@ -7,6 +7,7 @@ module.exports = {
       backgroundImage: theme => ({
        'home': "url('/bghome.jpg')",
        'login': "url('/login.png')",
+       'register': "url('/register.png')",
       }),
     },
     screens: {
