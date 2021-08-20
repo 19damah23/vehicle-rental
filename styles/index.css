@@ -9,6 +9,10 @@ body {
   font-family: 'Playfair Display', serif;
 }
 
+.fontMulish {
+  font-family: 'Mulish';
+}
+
 hr.home {
   width: 38px;
   border: 2px solid;
