@@ -5,9 +5,11 @@ import Star from "../../components/Star"
 import Card from "../../components/Card"
 import Footer from "../../components/Footer"
 import Link from "next/link"
-import Router from "next/router";
 
 const Home = ({ data }) => {
+  const location = ['malang', 'bali', 'kalimantan', 'Yogyakarta']
+  const type = ['bike', 'cars', 'motorcycle', 'empat']
+  const date = ['satu', 'dua', 'tiga', 'empat']
   const item = ['satu', 'dua', 'tiga', 'empat']
 
   return (
@@ -24,12 +26,12 @@ const Home = ({ data }) => {
 
           <div>
             <div className="flex">
-              <Dropdown list={item} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-black opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-12" />
-              <Dropdown list={item} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-black opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-12" />
+              <Dropdown list={location} titleClass="font-bold text-sm lg:text-base bg-white" classSelect="rounded-md text-black bg-white opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-10" />
+              <Dropdown list={item} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-white opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-10" />
             </div>
-            <div className="flex mt-4 lg:mt-8">
-              <Dropdown list={item} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-black opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-12" />
-              <Dropdown list={item} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-black opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-12" />
+            <div className="flex mt-4 lg:mt-6">
+              <Dropdown list={type} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-white opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-10" />
+              <Dropdown list={date} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-white opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-10" />
             </div>
           </div>
 
@@ -52,8 +54,8 @@ const Home = ({ data }) => {
         <div className="flex mt-8 w-full flex-wrap">
           {data && data.map((item, index) => (
             <Link href={`/vehicle/${item.name}/${item.id}`}>
-              <a className="mx-3 lg:mx-3">
-                <Card name={item.name} location={item.location} img={`http://localhost:8080/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
+              <a className="mx-3 lg:mx-1" key={index}>
+                <Card name={item.name} location={item.location} img={`http://localhost:8080/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" />
               </a>
             </Link>
           ))}
