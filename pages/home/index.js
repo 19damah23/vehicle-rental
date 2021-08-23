@@ -6,11 +6,7 @@ import Card from "../../components/Card"
 import Footer from "../../components/Footer"
 import Link from "next/link"
 
-const Home = ({ data }) => {
-  const location = ['malang', 'bali', 'kalimantan', 'Yogyakarta']
-  const type = ['bike', 'cars', 'motorcycle', 'empat']
-  const date = ['satu', 'dua', 'tiga', 'empat']
-  const item = ['satu', 'dua', 'tiga', 'empat']
+const Home = ({ dataVehicle, dataType, dataLocation }) => {
 
   return (
     <>
@@ -25,13 +21,9 @@ const Home = ({ data }) => {
           <hr className="home mt-4 text-white mb-12" />
 
           <div>
-            <div className="flex">
-              <Dropdown list={location} titleClass="font-bold text-sm lg:text-base bg-white" classSelect="rounded-md text-black bg-white opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-10" />
-              <Dropdown list={item} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-white opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-10" />
-            </div>
-            <div className="flex mt-4 lg:mt-6">
-              <Dropdown list={type} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-white opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-10" />
-              <Dropdown list={date} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-white opacity-50 text-sm lg:text-base focus:outline-none mr-4 w-40 h-10" />
+            <div className="flex flex-col lg:flex-row">
+              <Dropdown list={dataLocation.data} titleClass="font-bold text-sm lg:text-base bg-white" classSelect="rounded-md text-black bg-white opacity-50 text-sm lg:text-base focus:outline-none lg:mr-4 h-10 w-60" />
+              <Dropdown list={dataType.data} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md bg-gray-200 text-black bg-white bg-opacity-50 text-sm lg:text-base focus:outline-none h-10 w-60 mt-4 lg:mt-0" />
             </div>
           </div>
 
@@ -52,10 +44,10 @@ const Home = ({ data }) => {
         </div>
 
         <div className="flex mt-8 w-full flex-wrap">
-          {data && data.map((item, index) => (
+          {dataVehicle.data && dataVehicle.data.map((item, index) => (
             <Link href={`/vehicle/${item.name}/${item.id}`}>
               <a className="mx-3 lg:mx-1" key={index}>
-                <Card name={item.name} location={item.location} img={`http://localhost:8080/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" />
+                <Card name={item.name} location={item.location} img={`http://localhost:4000/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" />
               </a>
             </Link>
           ))}
@@ -98,10 +90,22 @@ const Home = ({ data }) => {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`${process.env.NEXT_BACKEND_API}v1/vehicles`)
-  const data = await res.json()
+  const res = await fetch(`${process.env.NEXT_BACKEND_API}v1/vehicles?perPage=4`)
+  const dataVehicle = await res.json()
 
-  return { props: data }
+  const type = await fetch(`${process.env.NEXT_BACKEND_API}v1/category`)
+  const dataType = await type.json()
+
+  const location = await fetch(`${process.env.NEXT_BACKEND_API}v1/locations`)
+  const dataLocation = await location.json()
+
+  return {
+    props: {
+      dataVehicle,
+      dataType,
+      dataLocation
+    }
+  }
 }
 
 export default Home;

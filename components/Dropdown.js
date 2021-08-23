@@ -7,7 +7,7 @@ const Dropdown = ({ list, classSelect, title, titleClass, handleChange, name, id
       ) : ''}
       <select name={name} id={id} onChange={handleChange} className={classSelect}>
         {list && list.map((item, index) => (
-          <option value={item} key={index}>{item}</option>
+          <option value={item.title} key={index}>{item.title}</option>
         ))}
       </select>
     </>
