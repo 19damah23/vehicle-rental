@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import backendApi from "../pages/api/backendApi";
 
-const Navbar = (ctx) => {
+const Navbar = (ctx, {profile}) => {
   const { isAuth, userId } = cookies(ctx)
   const [isMobile, setIsMobile] = useState(false)
   const [show, setShow] = useState(false)
@@ -13,6 +13,7 @@ const Navbar = (ctx) => {
   const router = useRouter()
 
   useEffect(() => {
+    console.log('oke')
     backendApi.get(`users/${userId}`, {
       withCredentials: true
     })
@@ -23,7 +24,7 @@ const Navbar = (ctx) => {
         console.log(error.response)
       })
 
-  }, [])
+  }, [profile])
 
   const logout = () => {
     backendApi.get('auth/logout', {
@@ -94,7 +95,7 @@ const Navbar = (ctx) => {
                 <li className="mt-5 lg:mt-0 text-base relative">
                   <div>
                     <button onClick={() => setShow(!show)}>
-                      <Image src={`http://localhost:4000/files/${avatar}`} width={40} height={40} alt="profile" className="rounded-full" />
+                      <Image src={avatar ? `http://localhost:4000/files/${avatar}` : '/people.png'} width={40} height={40} alt="profile" className="rounded-full" />
                     </button>
                   </div>
                   <div className={`${show === true ? 'block' : 'hidden'} ml-auto absolute z-10 bg-white rounded-md`}>
