@@ -1,9 +1,41 @@
+import cookies from "next-cookies";
 import Image from "next/image"
 import Link from 'next/link'
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from 'next/router'
+import backendApi from "../pages/api/backendApi";
 
-const Navbar = () => {
+const Navbar = (ctx) => {
+  const { isAuth, userId } = cookies(ctx)
   const [isMobile, setIsMobile] = useState(false)
+  const [show, setShow] = useState(false)
+  const [avatar, setAvatar] = useState('')
+  const router = useRouter()
+
+  useEffect(() => {
+    backendApi.get(`users/${userId}`, {
+      withCredentials: true
+    })
+      .then((res) => {
+        setAvatar(res.data.data[0].avatar)
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
+
+  }, [])
+
+  const logout = () => {
+    backendApi.get('auth/logout', {
+      withCredentials: true
+    })
+    .then((res) => {
+      router.push('/login')
+    })
+    .catch((error) => {
+      console.log(error.response)
+    })
+  }
 
   return (
     <nav className="sm:h-20 md:h-28 lg:h-28 fixed bg-white z-10 w-full top-0 py-2 flex items-center">
@@ -52,16 +84,53 @@ const Navbar = () => {
                 About
               </Link>
             </li>
-            <li className="mt-5 lg:mt-0 lg:mr-5 border border-yellow-400 hover:bg-yellow-400 focus:bg-yellow-400 text-base w-28 h-10 flex items-center justify-center rounded-md">
-              <Link href="/login">
-                Login
-              </Link>
-            </li>
-            <li className="mt-5 lg:mt-0 border border-yellow-400 hover:bg-yellow-400 focus:bg-yellow-400 text-base w-28 h-10 flex items-center justify-center rounded-md">
-              <Link href="/register">
-                Register
-              </Link>
-            </li>
+            {isAuth ? (
+              <div className="flex flex-col lg:flex-row">
+                <li className="mt-5 lg:mt-0 lg:mr-5">
+                  <Link href="/chat">
+                    <Image src="/email.png" width={45} height={40} alt="chat" />
+                  </Link>
+                </li>
+                <li className="mt-5 lg:mt-0 text-base relative">
+                  <div>
+                    <button onClick={() => setShow(!show)}>
+                      <Image src={`http://localhost:4000/files/${avatar}`} width={40} height={40} alt="profile" className="rounded-full" />
+                    </button>
+                  </div>
+                  <div className={`${show === true ? 'block' : 'hidden'} ml-auto absolute z-10 bg-white rounded-md`}>
+                    <ul>
+                      <li className="hover:bg-indigo-600 px-8 py-2 rounded-md hover:text-white">
+                        <Link href="/profile">
+                          <a>
+                            Profile
+                          </a>
+                        </Link>
+                      </li>
+                      <li className="hover:bg-indigo-600 px-8 py-2 rounded-md hover:text-white">
+                        <button onClick={logout}>
+                          <a>
+                            Logout
+                          </a>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </div>
+            ) : (
+              <div className="flex flex-col lg:flex-row">
+                <li className="mt-5 lg:mt-0 lg:mr-5 border border-yellow-400 hover:bg-yellow-400 focus:bg-yellow-400 text-base w-28 h-10 flex items-center justify-center rounded-md">
+                  <Link href="/login">
+                    Login
+                  </Link>
+                </li>
+                <li className="mt-5 lg:mt-0 border border-yellow-400 hover:bg-yellow-400 focus:bg-yellow-400 text-base w-28 h-10 flex items-center justify-center rounded-md">
+                  <Link href="/register">
+                    Register
+                  </Link>
+                </li>
+              </div>
+            )}
           </ul>
         </div>
       </div>

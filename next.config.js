@@ -9,6 +9,14 @@ module.exports = {
         source: '/',
         destination: '/home',
       },
+      {
+        source: '/login',
+        destination: '/auth/login',
+      },
+      {
+        source: '/register',
+        destination: '/auth/register',
+      }
     ]
   },
 }
