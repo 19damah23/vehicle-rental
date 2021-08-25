@@ -5,6 +5,7 @@ import Star from "../../components/Star"
 import Card from "../../components/Card"
 import Footer from "../../components/Footer"
 import Link from "next/link"
+import { requireAuthentication } from "../../HOC/requireAuthentication/requireAuthentication"
 
 const Home = ({ dataVehicle, dataType, dataLocation }) => {
 
@@ -45,8 +46,8 @@ const Home = ({ dataVehicle, dataType, dataLocation }) => {
 
         <div className="flex mt-8 w-full flex-wrap">
           {dataVehicle.data && dataVehicle.data.map((item, index) => (
-            <Link href={`/vehicle/${item.name}/${item.id}`}>
-              <a className="mx-3 lg:mx-1" key={index}>
+            <Link href={`/vehicle/${item.name}/${item.id}`} key={index}>
+              <a className="mx-3 lg:mx-1">
                 <Card name={item.name} location={item.location} img={`http://localhost:4000/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" />
               </a>
             </Link>
@@ -89,23 +90,25 @@ const Home = ({ dataVehicle, dataType, dataLocation }) => {
   );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch(`${process.env.NEXT_BACKEND_API}v1/vehicles?perPage=4`)
-  const dataVehicle = await res.json()
+export default Home;
 
-  const type = await fetch(`${process.env.NEXT_BACKEND_API}v1/category`)
-  const dataType = await type.json()
+export const getServerSideProps = requireAuthentication(
+  async (ctx) => {
+    const res = await fetch(`${process.env.NEXT_BACKEND_API}v1/vehicles?perPage=4`)
+    const dataVehicle = await res.json()
 
-  const location = await fetch(`${process.env.NEXT_BACKEND_API}v1/locations`)
-  const dataLocation = await location.json()
+    const type = await fetch(`${process.env.NEXT_BACKEND_API}v1/category`)
+    const dataType = await type.json()
 
-  return {
-    props: {
-      dataVehicle,
-      dataType,
-      dataLocation
+    const location = await fetch(`${process.env.NEXT_BACKEND_API}v1/locations`)
+    const dataLocation = await location.json()
+
+    return {
+      props: {
+        dataVehicle,
+        dataType,
+        dataLocation
+      }
     }
   }
-}
-
-export default Home;
+)
