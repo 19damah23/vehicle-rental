@@ -100,12 +100,14 @@ const Profile = ({ data }, context) => {
             }, 2500);
           })
           .catch((error) => {
+            console.log(error.response)
             toast.error(error.response.data.message, {
               position: toast.POSITION.TOP_CENTER,
             });
           });
       })
       .catch((error) => {
+        console.log(error)
         toast.error(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
