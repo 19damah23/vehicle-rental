@@ -6,8 +6,11 @@ import Card from "../../components/Card"
 import Footer from "../../components/Footer"
 import Link from "next/link"
 import { requireAuthentication } from "../../HOC/requireAuthentication/requireAuthentication"
+import cookies from "next-cookies"
+import { useContext } from "react"
 
-const Home = ({ dataVehicle, dataType, dataLocation }) => {
+const Home = ({ dataVehicle, dataType, dataLocation }, ctx) => {
+  const { role } = cookies(useContext)
 
   return (
     <>
@@ -35,7 +38,7 @@ const Home = ({ dataVehicle, dataType, dataLocation }) => {
       <div className="container mx-auto py-10 lg:py-20">
         <div className="flex justify-between">
           <h3 className="font-bold text-xl lg:text-4xl fontPlayfair">Popular in town</h3>
-          <Link href={`/admin/vehicle`}>
+          <Link href={role === 'admin' ? `/admin/vehicle` : `/vehicle`}>
             <a className="flex items-center text-yellow-400 text-xs lg:text-base">
               Show all <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -46,12 +49,18 @@ const Home = ({ dataVehicle, dataType, dataLocation }) => {
 
         <div className="flex mt-8 w-full flex-wrap">
           {dataVehicle.data && dataVehicle.data.map((item, index) => (
-            <Link href={`/vehicle/${item.name}/${item.id}`} key={index}>
+            <Link href={role === 'admin' ? `/admin/vehicle/${item.name}/${item.id}` : `/vehicle/${item.name}/${item.id}`} key={index}>
               <a className="mx-3 lg:mx-1">
                 <Card name={item.name} location={item.location} img={`http://localhost:4000/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" />
               </a>
             </Link>
           ))}
+        </div>
+
+        <div className={`mt-10 w-full h-10 flex justify-center items-center ${role === 'admin' ? 'block' : 'hidden'}`}>
+        <Link href="/admin/add">
+          <a className="w-full h-10 lg:h-20 flex items-center justify-center bg-black text-yellow-500 hover:bg-opacity-80 rounded-md font-bold text-2xl">Add new Item</a>
+        </Link>
         </div>
       </div>
 
