@@ -8,6 +8,7 @@ import backendApi from "../api/backendApi";
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import cookies from 'next-cookies'
+import Router from "next/router";
 
 const Payment = ({ data }, req) => {
   const [form, setForm] = useState({
@@ -30,6 +31,9 @@ const Payment = ({ data }, req) => {
     })
       .then(() => {
         toast.success('Transaction in process!', { position: toast.POSITION.TOP_CENTER })
+        setTimeout(() => {
+          Router.push('/history')
+        }, 2500);
       })
       .catch((error) => {
         toast.error(error.response.data.message, { position: toast.POSITION.TOP_CENTER })
@@ -92,7 +96,7 @@ const Payment = ({ data }, req) => {
             <div className="w-full lg:w-2/3 flex flex-col mt-4 lg:mt-0">
               <div className="flex flex-col lg:flex-row justify-between border rounded-md py-4 px-7 lg:px-16 lg:py-9">
                 <p className="font-extrabold text-lg lg:text-2xl">Reservation Date :</p>
-                <p className="font-base text-lg lg:text-2xl">{item.startDate + ' - ' + item.expDate}</p>
+                <p className="font-base text-lg lg:text-2xl">{item.startDate + ' to ' + item.expDate}</p>
               </div>
               <div className="flex flex-col border rounded-md py-4 px-7 lg:pl-16 lg:py-9 mt-4 lg:mt-6 h-full">
                 <p className="font-extrabold text-lg lg:text-2xl">Identity :</p>
