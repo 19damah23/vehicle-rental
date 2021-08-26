@@ -2,19 +2,24 @@ import Footer from "../../../components/Footer"
 import Navbar from "../../../components/Navbar"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import backendApi from "../../api/backendApi"
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from "next/router";
+import cookies from 'next-cookies'
 
-const Vehicle = ({ data }) => {
+const Vehicle = ({ data, user }, req) => {
+  const router = useRouter()
+  let { userId } = cookies(req)
   const [form, setForm] = useState({
-    vehiclesId: data[0].id,
-    userId: '',
+    vehiclesId: data.data[0].id,
+    userId: userId,
     qty: 1,
     days: 1,
     date: ''
   })
+
 
   const handleInput = (e) => {
     setForm({
@@ -24,32 +29,36 @@ const Vehicle = ({ data }) => {
   }
 
   const handleQty = (params) => {
-    if (params === 'plus' && form.qty < data[0].stock) {
+    if (params === 'plus' && form.qty < data.data[0].stock) {
       setForm({
         ...form,
-        qty: form.qty + 1 
+        qty: form.qty + 1
       })
     }
     if (params === 'minus' && form.qty > 1) {
       setForm({
         ...form,
-        qty: form.qty - 1 
+        qty: form.qty - 1
       })
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    backendApi.post(`transactions`, form)
-    .then((res) => {
-      toast.success(res,{position: toast.POSITION.TOP_CENTER})
+    backendApi.post(`transactions`, form, {
+      withCredentials: true,
+      origin: ['http://localhost:4000'] 
     })
-    .catch((error) => {
-      toast.error(error.response.data.message, {position: toast.POSITION.TOP_CENTER})
-    })
+      .then((res) => {
+        toast.success('Transaction success!', { position: toast.POSITION.TOP_CENTER })
+        setTimeout(() => {
+          router.push(`/payment/${res.data.data.id}`)
+        }, 2500);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message, { position: toast.POSITION.TOP_CENTER })
+      })
   }
-
-  console.log(form)
 
   return (
     <>
@@ -57,15 +66,15 @@ const Vehicle = ({ data }) => {
       <Navbar />
 
       <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-20 lg:mt-40 flex">
-        <Link href="">
+        <Link href="/vehicle">
           <a>
             <Image src="/prev.png" alt="back" width="24px" height="40px" />
           </a>
         </Link>
         <h3 className="font-bold text-4xl ml-14">Reservation</h3>
       </div>
-      {data && data.map(item => (
-        <div>
+      {data.data && data.data.map(item => (
+        <div key={item.id}>
           <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-16 flex flex-col lg:flex-row">
             <div className="w-full lg:w-2/3 mx-auto">
               <Image src={`http://localhost:4000/files/${item.images[0]}`} alt="bike" width="696px" height="616px" />
@@ -111,13 +120,20 @@ export async function getServerSideProps(context) {
     const vehicle = await fetch(`${process.env.NEXT_BACKEND_API}v1/vehicles/${id}`)
     const data = await vehicle.json()
 
-    console.log(data)
-
     return {
-      props: data
+      props: {data}
     }
   } catch (error) {
-    return new Error(error.message)
+    if(!context.req){
+      Router.push('/login')
+    }
+
+    if(context.req){
+      context.res.writeHead(301, {
+        Location: 'http://localhost:3000/login'
+      })
+      context.res.end()
+    }
   }
 }
 
