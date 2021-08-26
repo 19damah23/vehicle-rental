@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import backendApi from "../pages/api/backendApi";
 
 const Navbar = (ctx, {profile}) => {
-  const { isAuth, userId } = cookies(ctx)
+  const { isAuth, userId, role } = cookies(ctx)
   const [isMobile, setIsMobile] = useState(false)
   const [show, setShow] = useState(false)
   const [avatar, setAvatar] = useState('')
@@ -76,7 +76,7 @@ const Navbar = (ctx, {profile}) => {
               </Link>
             </li>
             <li className="mt-5 lg:mt-0 lg:mr-8 text-gray-600 hover:text-black focus:text-black text-base">
-              <Link href="/history">
+              <Link href={role === 'admin' ? "/admin/history" : "/history"}>
                 History
               </Link>
             </li>
