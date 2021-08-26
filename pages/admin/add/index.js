@@ -5,8 +5,10 @@ import Dropdown from "../../../components/Dropdown"
 import { useState } from "react"
 import backendApi from "../../api/backendApi"
 import Router from "next/router";
+import { ToastContainer, toast, Zoom } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const AddVehicle = () => {
+const AddVehicle = ({ dataType }) => {
   const [stock, setStock] = useState(1)
   const [images, setImages] = useState([]);
   const [imagesPreview] = [images.map((item) => URL.createObjectURL(item))]
@@ -16,13 +18,13 @@ const AddVehicle = () => {
     description: '',
     price: null,
     stock: stock,
-    category: 'cars',
+    category: 'Motorbike',
     status: 'available'
   })
 
   const handleInput = (e) => {
     e.preventDefault();
-    console.log(e.target.name, e.target.value)
+
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -48,22 +50,24 @@ const AddVehicle = () => {
       data.append('images', files[i])
     };
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgxNjlkZDFlMGQwOTRmMDI4ZjMwZGVlZGM1OWJiNjY5IiwibmFtZSI6Ik11Y2hhbWFkIEFndXMgSGVybWF3YW4iLCJlbWFpbCI6Im11Y2hhbWFkYWd1c2hAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicGhvbmUiOm51bGwsImF2YXRhciI6bnVsbCwiZ2VuZGVyIjpudWxsLCJleHAiOjE2MjkzNDM3NTAsImlhdCI6MTYyOTM0MDE1MH0.3zaKvvyX7OgBhhKm0tlnKYFyoPOnPYmvYENAErcmEec'
-    const config = {
-      headers: { Authorization: `Bearer ${token}` }
-    };
+    await backendApi.post(`vehicles/add`, data, {
+      withCredentials: true
+    })
+      .then((res) => {
+        toast.success('Successfully added new vehicle!', { position: toast.POSITION.TOP_CENTER })
 
-    await backendApi.post(`vehicles/add`, data, config)
-    .then((res) => {
-      Router.push(`/admin/vehicle`)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+        setTimeout(() => {
+          Router.push(`/admin/vehicle`)
+        }, 2500);
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
   };
 
   return (
     <>
+      <ToastContainer draggable={false} transition={Zoom} autoClose={2000} />
       <Navbar />
 
       <div className="xs:container sm:container md:container lg:container xl:container mx-auto flex flex-col py-20 lg:pt-32 lg:pb-24">
@@ -92,11 +96,11 @@ const AddVehicle = () => {
 
               {imagesPreview[1] ? (
                 <div className="flex justify-between mt-5 overflow-x-scroll">{
-                imagesPreview.map((item) => (
+                  imagesPreview.map((item) => (
                     <div className="flex flex-col justify-center items-center w-full h-20 lg:h-44 bg-gray-200 rounded-lg mr-2 lg:mr-5">
                       <img src={item} alt="camera" className="w-full h-full rounded-md" />
                     </div>
-                ))
+                  ))
                 }</div>
               ) : (
                 <div className="flex justify-between mt-5">
@@ -129,7 +133,7 @@ const AddVehicle = () => {
                 <input type="text" name="price" id="price" placeholder="Type the price" className="px-4 py-3 lg:py-4 rounded-md bg-gray-200 text-gray-400 text-lg lg:text-2xl focus:outline-none mt-2 lg:mt-4" onChange={handleInput} />
               </div>
               <div className="flex flex-col mt-4">
-                <Dropdown title="Status :" name="status" id="status" list={['available', 'full booked']} handleChange={handleInput} titleClass="fontPlayfair font-bold text-lg lg:text-2xl mt-2" classSelect="px-4 py-3 lg:py-4 rounded-md bg-gray-200 text-gray-400 text-lg lg:text-2xl focus:outline-none mt-2 lg:mt-4" />
+                <Dropdown title="Status :" name="status" id="status" list={[{ title: 'available' }, { title: 'full booked' }]} handleChange={handleInput} titleClass="fontPlayfair font-bold text-lg lg:text-2xl mt-2" classSelect="px-4 py-3 lg:py-4 rounded-md bg-gray-200 text-gray-400 text-lg lg:text-2xl focus:outline-none mt-2 lg:mt-4" />
               </div>
               <div className="flex justify-between items-center mt-4 lgmt-6">
                 <label htmlFor="stock" className="fontPlayfair font-bold text-lg lg:text-2xl">Stock :</label>
@@ -147,7 +151,7 @@ const AddVehicle = () => {
           </div>
           <div className="flex justify-between mt-16">
             <div className="w-2/5 pr-2 lg:pr-4">
-              <Dropdown list={["Cars", "Bike", "Motorbike", "+  Add category"]} name="category" id="category" handleChange={handleInput} classSelect="px-4 w-full h-12 lg:h-20 rounded-md text-white text-lg lg:text-2xl focus:outline-none bg-black font-bold" />
+              <Dropdown list={dataType.data} name="category" id="category" handleChange={handleInput} classSelect="px-4 w-full h-12 lg:h-20 rounded-md text-white text-lg lg:text-2xl focus:outline-none bg-black font-bold" />
             </div>
             <div className="w-3/5 pl-2 lg:pl-4">
               <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-2xl h-12 lg:h-20 rounded-lg font-bold" type="submit">Save item</button>
@@ -158,6 +162,17 @@ const AddVehicle = () => {
       <Footer />
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const type = await fetch(`${process.env.NEXT_BACKEND_API}v1/category`)
+  const dataType = await type.json()
+
+  return {
+    props: {
+      dataType
+    }
+  }
 }
 
 export default AddVehicle;
