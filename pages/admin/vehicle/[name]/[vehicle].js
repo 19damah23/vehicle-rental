@@ -36,8 +36,8 @@ const Vehicle = () => {
 
       {data && data.map((item) => (
         <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-16 flex flex-col lg:flex-row">
-          <div className="w-full lg:w-2/3 mx-auto">
-            <Image src="/img17.png" alt="bike" width="696px" height="616px" />
+          <div className="w-full lg:w-2/3 mx-auto rounded-md">
+            <Image src={`http://localhost:4000/files/${item.images[0]}`} alt="bike" width="696px" height="616px" className="rounded-md" />
           </div>
           <div className="w-full lg:w-1/3 flex flex-col">
             <h1 className="fontPlayfair font-extrabold text-5xl">{item.name}</h1>
