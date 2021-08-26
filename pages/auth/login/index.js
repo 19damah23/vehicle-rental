@@ -35,6 +35,10 @@ const Login = () => {
       });
   };
 
+  const handleRegister = () => {
+    router.push('/register')
+  }
+
   return (
     <>
       <ToastContainer draggable={false} transition={Zoom} autoClose={2000} />
@@ -52,6 +56,7 @@ const Login = () => {
             <ButtonAuth
               title="Sign Up"
               giveClass="bg-black text-yellow-500 hover:opacity-80 font-black text-lg lg:text-2xl hidden lg:block"
+              action={() => handleRegister()}
             />
           </div>
           <div className="w-full lg:w-1/2 lg:text-right mt-6 lg:mt-0">
@@ -85,6 +90,7 @@ const Login = () => {
             <ButtonAuth
               title="Sign Up"
               giveClass="bg-black hover:opacity-80 text-yellow-500 font-black text-lg lg:text-2xl mt-4 lg:mt-9 lg:hidden"
+              action={() => handleRegister()}
             />
           </div>
         </div>
