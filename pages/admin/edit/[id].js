@@ -4,11 +4,12 @@ import Footer from "../../../components/Footer"
 import Dropdown from "../../../components/Dropdown"
 import { useEffect, useState } from "react"
 import Router, { useRouter } from "next/router";
-import axios from "axios"
 import backendApi from "../../api/backendApi"
 import Link from "next/link"
+import { ToastContainer, toast, Zoom } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const EditVehicle = () => {
+const EditVehicle = ({ dataType }) => {
   const { query } = useRouter()
   const id = query.id
   const [images, setImages] = useState([]);
@@ -23,7 +24,7 @@ const EditVehicle = () => {
     status: 'available',
     oldImage: []
   });
-  
+
   const setData = (data) => {
     setInput({
       name: data.name,
@@ -36,7 +37,7 @@ const EditVehicle = () => {
       oldImage: data.images,
     })
   }
-  
+
   useEffect(() => {
     backendApi.get(`vehicles/${id}`)
       .then((result) => {
@@ -98,37 +99,40 @@ const EditVehicle = () => {
       };
     }
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgxNjlkZDFlMGQwOTRmMDI4ZjMwZGVlZGM1OWJiNjY5IiwibmFtZSI6Ik11Y2hhbWFkIEFndXMgSGVybWF3YW4iLCJlbWFpbCI6Im11Y2hhbWFkYWd1c2hAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicGhvbmUiOm51bGwsImF2YXRhciI6bnVsbCwiZ2VuZGVyIjpudWxsLCJleHAiOjE2MjkzMzU1MDEsImlhdCI6MTYyOTMzMTkwMX0.kRmH9V8HVOKVr-VNrz8-CQzanrx7pcNdi9MbSL0zQKE'
-    const config = {
-      headers: { Authorization: `Bearer ${token}` }
-    };
+    backendApi.patch(`vehicles/${id}`, data, {
+      withCredentials: true
+    })
+      .then((res) => {
+        toast.success('Successfully update vehicle!', { position: toast.POSITION.TOP_CENTER })
 
-    backendApi.patch(`vehicles/${id}`, data, config)
-    .then((res) => {
-      Router.push(`/admin/vehicle`)
-    })
-    .catch((error) => {
-      alert(error.response.data.message)
-    })
+        setTimeout(() => {
+          Router.push(`/admin/vehicle`)
+        }, 2500);
+      })
+      .catch((error) => {
+        alert(error.response.data.message)
+      })
   };
 
   const handleDelete = (id) => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgxNjlkZDFlMGQwOTRmMDI4ZjMwZGVlZGM1OWJiNjY5IiwibmFtZSI6Ik11Y2hhbWFkIEFndXMgSGVybWF3YW4iLCJlbWFpbCI6Im11Y2hhbWFkYWd1c2hAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicGhvbmUiOm51bGwsImF2YXRhciI6bnVsbCwiZ2VuZGVyIjpudWxsLCJleHAiOjE2MjkzMzU1MDEsImlhdCI6MTYyOTMzMTkwMX0.kRmH9V8HVOKVr-VNrz8-CQzanrx7pcNdi9MbSL0zQKE'
-    const config = {
-      headers: { Authorization: `Bearer ${token}` }
-    };
+    backendApi.delete(`vehicles/${id}`, {
+      withCredentials: true
+    })
+      .then((res) => {
+        toast.success('Successfully delete vehicle!', { position: toast.POSITION.TOP_CENTER })
 
-    backendApi.delete(`vehicles/${id}`, config)
-    .then((res) => {
-      Router.push(`/admin/vehicle`)
-    })
-    .catch((error) => {
-      alert(error.response.data.message)
-    })
+        setTimeout(() => {
+          Router.push(`/admin/vehicle`)
+        }, 2500);
+      })
+      .catch((error) => {
+        alert(error.response.data.message)
+      })
   }
 
   return (
     <>
+      <ToastContainer draggable={false} transition={Zoom} autoClose={2000} />
       <Navbar />
 
       <div className="xs:container sm:container md:container lg:container xl:container mx-auto flex flex-col py-20 lg:pt-32 lg:pb-24">
@@ -136,7 +140,7 @@ const EditVehicle = () => {
           <Link href="/admin/vehicle" type="button" className="w-5 h-10 lg:w-7 lg:h-12">
             <Image src="/prev.png" alt="back" width="28px" height="48px" />
           </Link>
-          <h3 className="text-xl lg:text-4xl font-bold ml-12 lg:ml-20">Add new item</h3>
+          <h3 className="text-xl lg:text-4xl font-bold ml-12 lg:ml-20">Edit item</h3>
         </div>
 
         <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -145,6 +149,8 @@ const EditVehicle = () => {
               <div className="flex flex-col justify-center items-center w-full h-48 lg:h-96 bg-gray-200 rounded-lg relative">
                 {imagesPreview[0] ? (
                   <img src={imagesPreview[0]} alt="camera" className="w-full h-full rounded-md" />
+                ) : input.oldImage ? (
+                  <img src={`http://localhost:4000/files/${input.oldImage[0]}`} alt="camera" className="w-full h-full rounded-md" />
                 ) : (
                   <label htmlFor="images" className="flex items-center flex-col">
                     <div className="h-16 w-20 lg:h-28 lg:w-28">
@@ -212,7 +218,7 @@ const EditVehicle = () => {
           </div>
           <div className="flex justify-between mt-16">
             <div className="w-5/12 pr-1 lg:pr-4">
-              <Dropdown list={["Cars", "Bike", "Motorbike", "+  Add category"]} name="category" id="category" handleChange={handleInput} classSelect="px-4 w-full h-12 lg:h-20 rounded-md text-white text-lg lg:text-2xl focus:outline-none bg-black font-bold" />
+              <Dropdown list={dataType.data} name="category" id="category" handleChange={handleInput} classSelect="px-4 w-full h-12 lg:h-20 rounded-md text-white text-lg lg:text-2xl focus:outline-none bg-black font-bold" />
             </div>
             <div className="w-4/12 px-1 lg:px-4">
               <button type="submit" className="w-full bg-yellow-400 hover:bg-yellow-500 text-base lg:text-2xl h-12 lg:h-20 rounded-lg font-bold">Save item</button>
@@ -226,6 +232,17 @@ const EditVehicle = () => {
       <Footer />
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const type = await fetch(`${process.env.NEXT_BACKEND_API}v1/category`)
+  const dataType = await type.json()
+
+  return {
+    props: {
+      dataType
+    }
+  }
 }
 
 export default EditVehicle;
