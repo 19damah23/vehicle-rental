@@ -1,6 +1,6 @@
 import 'tailwindcss/tailwind.css'
 // eslint-disable-next-line no-unused-vars
-// import Head from 'next/head'
+import Head from 'next/head'
 import '../styles/index.css'
 
 function MyApp ({ Component, pageProps }) {
