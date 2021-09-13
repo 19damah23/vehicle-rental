@@ -8,6 +8,8 @@ import backendApi from "../../api/backendApi"
 import Link from "next/link"
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const EditVehicle = ({ dataType }) => {
   const { query } = useRouter()
@@ -24,6 +26,23 @@ const EditVehicle = ({ dataType }) => {
     status: 'available',
     oldImage: []
   });
+
+  const confirm = (id) => {
+    confirmAlert({
+      title: 'Are you sure?',
+      message: 'You want to delete this vehicle?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => handleDelete(id)
+        },
+        {
+          label: 'No',
+          onClick: () => toast.error('Cancelled!', { position: toast.POSITION.TOP_CENTER })
+        }
+      ]
+    });
+  }
 
   const setData = (data) => {
     setInput({
@@ -200,7 +219,7 @@ const EditVehicle = ({ dataType }) => {
                 <input type="text" name="price" id="price" placeholder="Type the price" className="px-4 py-3 lg:py-4 rounded-md bg-gray-200 text-gray-400 text-lg lg:text-2xl focus:outline-none mt-2 lg:mt-4" value={input.price} onChange={handleInput} />
               </div>
               <div className="flex flex-col mt-4 lg:mt-6">
-                <Dropdown title="Status :" name="status" id="status" list={['available', 'full booked']} handleChange={handleInput} titleClass="fontPlayfair font-bold text-lg lg:text-2xl mt-2" classSelect="px-4 py-3 lg:py-4 rounded-md bg-gray-200 text-gray-400 text-lg lg:text-2xl focus:outline-none mt-2 lg:mt-4" />
+                <Dropdown title="Status :" name="status" id="status" list={[{title: 'available'}, {title: 'full booked'}]} handleChange={handleInput} titleClass="fontPlayfair font-bold text-lg lg:text-2xl mt-2" classSelect="px-4 py-3 lg:py-4 rounded-md bg-gray-200 text-gray-400 text-lg lg:text-2xl focus:outline-none mt-2 lg:mt-4" />
               </div>
               <div className="flex justify-between items-center mt-4 lg:mt-6">
                 <label htmlFor="stock" className="fontPlayfair font-bold text-lg lg:text-2xl">Stock :</label>
@@ -224,7 +243,7 @@ const EditVehicle = ({ dataType }) => {
               <button type="submit" className="w-full bg-yellow-400 hover:bg-yellow-500 text-base lg:text-2xl h-12 lg:h-20 rounded-lg font-bold">Save item</button>
             </div>
             <div className="w-3/12 pl-1 lg:pl-4">
-              <button type="button" className="w-full bg-black text-yellow-500 text-base lg:text-2xl rounded-lg font-bold h-12 lg:h-20" onClick={() => handleDelete(id)}>Delete item</button>
+              <button type="button" className="w-full bg-black text-yellow-500 text-base lg:text-2xl rounded-lg font-bold h-12 lg:h-20" onClick={() => confirm(id)}>Delete item</button>
             </div>
           </div>
         </form>

@@ -56,7 +56,7 @@ const Vehicle = ({ name }) => {
           {data && data.map((item, index) => (
             <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
               <a className="mx-3 lg:mx-0 lg:mr-3">
-                <Card name={item.name} location={item.location} img={`http://localhost:8080/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
+                <Card name={item.name} location={item.location} img={`http://localhost:4000/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
               </a>
             </Link>
           ))}

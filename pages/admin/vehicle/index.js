@@ -17,7 +17,6 @@ const Vehicle = ({ data }) => {
       })
       .catch((err) => {
         setSearchData([])
-        console.log(err.response.data.message)
       })
   }, [query])
 

@@ -61,7 +61,7 @@ const AddVehicle = ({ dataType }) => {
         }, 2500);
       })
       .catch((err) => {
-        console.log(err.response)
+        toast.error(err.response.data.message, { position: toast.POSITION.TOP_CENTER })
       })
   };
 

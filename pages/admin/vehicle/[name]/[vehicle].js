@@ -46,7 +46,7 @@ const Vehicle = () => {
             <h5 className="font-bold text-red-600 text-2xl">No Prepayment</h5>
 
             <p className="text-base lg:text-2xl font-light mt-4 lg:mt-8">Capacity : 1 person</p>
-            <p className="text-base lg:text-2xl font-light mt-0 lg:mt-2">Type : Bike</p>
+            <p className="text-base lg:text-2xl font-light mt-0 lg:mt-2">Type : {item.category}</p>
             <p className="text-base lg:text-2xl font-light mt-0 lg:mt-2">Reservation before 2 PM</p>
 
             <p className="fontPlayfair font-extrabold text-4xl text-center my-4 lg:my-8">Rp. {item.price}</p>

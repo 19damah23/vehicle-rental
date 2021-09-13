@@ -11,6 +11,9 @@ module.exports = {
        'forgot': "url('/forgot.png')",
       }),
     },
+    fontFamily: {
+      'rubic': ['Rubik', 'sans-serif'],
+    },
     screens: {
       'xs': '350px',
       // => @media (max-width: 640px) { ... }
