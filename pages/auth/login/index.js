@@ -1,39 +1,40 @@
-import { useState } from "react";
-import ButtonAuth from "../../../components/ButtonAuth";
-import Footer from "../../../components/Footer";
-import InputAuth from "../../../components/InputAuth";
-import backendApi from "../../api/backendApi";
-import { ToastContainer, toast, Zoom } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/router";
+/* eslint-disable no-unused-vars */
+import { useState } from 'react'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import ButtonAuth from '../../../components/ButtonAuth'
+import Footer from '../../../components/Footer'
+import InputAuth from '../../../components/InputAuth'
+import backendApi from '../../api/backendApi'
+import 'react-toastify/dist/ReactToastify.css'
+import { useRouter } from 'next/router'
 
 const Login = () => {
   const router = useRouter()
   const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+    email: '',
+    password: ''
+  })
 
   const handleChange = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+      [e.target.name]: e.target.value
+    })
+  }
 
   const handleSubmit = () => {
     backendApi
-      .post(`auth/login`, form, { withCredentials: true })
+      .post('auth/login', form, { withCredentials: true })
       .then(() => {
         router.push('/')
       })
       .catch((error) => {
         toast.error(error.response.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      });
-  };
+          position: toast.POSITION.TOP_CENTER
+        })
+      })
+  }
 
   const handleRegister = () => {
     router.push('/register')
@@ -98,7 +99,7 @@ const Login = () => {
 
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

@@ -1,10 +1,11 @@
-import Footer from "../../../../components/Footer"
-import Navbar from "../../../../components/Navbar"
-import Image from "next/image"
-import Link from "next/link"
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import backendApi from "../../../api/backendApi";
+/* eslint-disable no-unused-vars */
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import Navbar from '../../../../components/Navbar'
+import Footer from '../../../../components/Footer'
+import backendApi from '../../../api/backendApi'
 
 const Vehicle = () => {
   const { query } = useRouter()
@@ -74,7 +75,7 @@ const Vehicle = () => {
 
       <Footer />
     </>
-  );
+  )
 }
 
-export default Vehicle;
+export default Vehicle

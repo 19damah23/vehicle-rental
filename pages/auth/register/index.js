@@ -1,46 +1,47 @@
-import InputAuth from "../../../components/InputAuth";
-import ButtonAuth from "../../../components/ButtonAuth";
-import Image from "next/image";
-import { useState } from "react";
-import backendApi from "../../api/backendApi";
-import { ToastContainer, toast, Zoom } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/router";
+/* eslint-disable no-unused-vars */
+import InputAuth from '../../../components/InputAuth'
+import ButtonAuth from '../../../components/ButtonAuth'
+import Image from 'next/image'
+import { useState } from 'react'
+import backendApi from '../../api/backendApi'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useRouter } from 'next/router'
 
 const Register = () => {
-  const router = useRouter();
+  const router = useRouter()
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+    name: '',
+    email: '',
+    password: ''
+  })
 
   const handleInput = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+      [e.target.name]: e.target.value
+    })
+  }
 
   const handleSubmit = () => {
     backendApi
-      .post("auth/register", form, {
-        withCredentials: true,
+      .post('auth/register', form, {
+        withCredentials: true
       })
       .then((res) => {
-        router.push("/login");
+        router.push('/login')
       })
       .catch((error) => {
         toast.error(error.response.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      });
-  };
+          position: toast.POSITION.TOP_CENTER
+        })
+      })
+  }
 
   const handleLogin = () => {
-    router.push("/login");
-  };
+    router.push('/login')
+  }
   return (
     <>
       <ToastContainer draggable={false} transition={Zoom} autoClose={2000} />
@@ -141,7 +142,7 @@ const Register = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

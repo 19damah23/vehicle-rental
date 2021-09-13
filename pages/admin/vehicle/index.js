@@ -1,10 +1,11 @@
-import Navbar from "../../../components/Navbar"
-import Image from "next/image"
-import Card from "../../../components/Card";
-import Footer from "../../../components/Footer";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import backendApi from "../../api/backendApi";
+/* eslint-disable no-unused-vars */
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import Navbar from '../../../components/Navbar'
+import Card from '../../../components/Card'
+import Footer from '../../../components/Footer'
+import backendApi from '../../api/backendApi'
 
 const Vehicle = ({ data }) => {
   const [query, setQuery] = useState('')
@@ -15,7 +16,7 @@ const Vehicle = ({ data }) => {
       .then((res) => {
         setSearchData(res.data.data)
       })
-      .catch((err) => {
+      .catch(() => {
         setSearchData([])
       })
   }, [query])
@@ -37,7 +38,8 @@ const Vehicle = ({ data }) => {
         </div>
       </div>
 
-      {query.length > 0 ? (
+      {query.length > 0
+        ? (
         <div className="xs:container sm:container md:container lg:container xl:container mx-auto pt-20">
           <div className="flex justify-between">
             <h3 className="font-bold text-xl lg:text-4xl fontPlayfair">Popular in town</h3>
@@ -51,16 +53,15 @@ const Vehicle = ({ data }) => {
           </div>
 
           <div className="flex mt-8 mb-10 w-full flex-wrap">
-            {searchData.map((item, index) =>
-              <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
+            {searchData.map((item, index) => <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
                 <a className="mr-4">
                   <Card name={item.name} location={item.location} img={`http://localhost:4000/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
                 </a>
-              </Link>
-            )}
+              </Link>)}
           </div>
         </div>
-      ) : (
+          )
+        : (
         <div>
           {data && data.map((items, index) => (
             <div className="xs:container sm:container md:container lg:container xl:container mx-auto py-10" key={index}>
@@ -87,18 +88,18 @@ const Vehicle = ({ data }) => {
             </div>
           ))}
         </div>
-      )}
+          )}
 
       <Footer />
     </>
-  );
+  )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps () {
   const res = await fetch(`${process.env.NEXT_BACKEND_API}v1/vehicles/grouped`)
   const data = await res.json()
 
   return { props: data }
 }
 
-export default Vehicle;
+export default Vehicle

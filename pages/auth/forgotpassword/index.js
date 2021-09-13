@@ -1,10 +1,10 @@
-import Footer from "../../../components/Footer";
-import Image from "next/image";
-import InputAuth from "../../../components/InputAuth";
-import ButtonAuth from "../../../components/ButtonAuth";
+/* eslint-disable no-unused-vars */
+import Image from 'next/image'
+import Footer from '../../../components/Footer'
+import InputAuth from '../../../components/InputAuth'
+import ButtonAuth from '../../../components/ButtonAuth'
 
-const ForgotPassword = () => {
-  return (
+const ForgotPassword = () => (
     <>
       <div className="bg-forgot min-h-screen">
         <div className="bg-black bg-opacity-30 w-full min-h-screen">
@@ -29,7 +29,6 @@ If you haven’t received any link, click Resend Link</span>
 
       <Footer />
     </>
-  );
-}
+)
 
-export default ForgotPassword;
+export default ForgotPassword

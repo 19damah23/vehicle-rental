@@ -1,44 +1,45 @@
-import Navbar from "../../../components/Navbar"
-import Image from "next/image"
-import Footer from "../../../components/Footer"
-import Dropdown from "../../../components/Dropdown"
-import { useState } from "react"
-import backendApi from "../../api/backendApi"
-import Router from "next/router";
-import { ToastContainer, toast, Zoom } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+/* eslint-disable no-unused-vars */
+import Image from 'next/image'
+import { useState } from 'react'
+import Router from 'next/router'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import Navbar from '../../../components/Navbar'
+import Footer from '../../../components/Footer'
+import Dropdown from '../../../components/Dropdown'
+import backendApi from '../../api/backendApi'
+import 'react-toastify/dist/ReactToastify.css'
 
 const AddVehicle = ({ dataType }) => {
   const [stock, setStock] = useState(1)
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState([])
   const [imagesPreview] = [images.map((item) => URL.createObjectURL(item))]
   const [input, setInput] = useState({
     name: '',
     location: '',
     description: '',
     price: null,
-    stock: stock,
+    stock,
     category: 'Motorbike',
     status: 'available'
   })
 
   const handleInput = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
-    });
-  };
+      [e.target.name]: e.target.value
+    })
+  }
 
   const onFileChange = (e) => {
-    setImages([...e.target.files]);
-  };
+    setImages([...e.target.files])
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const files = document.querySelector('input[type="file"]').files
-    const data = new FormData();
+    e.preventDefault()
+    const { files } = document.querySelector('input[type="file"]')
+    const data = new FormData()
     data.append('name', input.name)
     data.append('location', input.location)
     data.append('description', input.description)
@@ -48,22 +49,22 @@ const AddVehicle = ({ dataType }) => {
     data.append('status', input.status)
     for (let i = 0; i < files.length; i++) {
       data.append('images', files[i])
-    };
+    }
 
-    await backendApi.post(`vehicles/add`, data, {
+    await backendApi.post('vehicles/add', data, {
       withCredentials: true
     })
       .then((res) => {
         toast.success('Successfully added new vehicle!', { position: toast.POSITION.TOP_CENTER })
 
         setTimeout(() => {
-          Router.push(`/admin/vehicle`)
-        }, 2500);
+          Router.push('/admin/vehicle')
+        }, 2500)
       })
       .catch((err) => {
         toast.error(err.response.data.message, { position: toast.POSITION.TOP_CENTER })
       })
-  };
+  }
 
   return (
     <>
@@ -82,19 +83,22 @@ const AddVehicle = ({ dataType }) => {
           <div className="flex flex-col lg:flex-row justify-between mt-10 lg:mt-24">
             <div className="w-full lg:w-1/2 pr-0 lg:pr-5">
               <div className="flex flex-col justify-center items-center w-full h-48 lg:h-96 bg-gray-200 rounded-lg">
-                {imagesPreview[0] ? (
+                {imagesPreview[0]
+                  ? (
                   <img src={imagesPreview[0]} alt="camera" className="w-full h-full rounded-md" />
-                ) : (
+                    )
+                  : (
                   <label htmlFor="images" className="flex items-center flex-col">
                     <div className="h-16 w-20 lg:h-28 lg:w-28">
                       <Image src="/camera.png" alt="camera" height="110px" width="130px" />
                     </div>
                     <p className="text-gray-400 mt-5">Click to add image</p>
                   </label>
-                )}
+                    )}
               </div>
 
-              {imagesPreview[1] ? (
+              {imagesPreview[1]
+                ? (
                 <div className="flex justify-between mt-5 overflow-x-scroll">{
                   imagesPreview.map((item) => (
                     <div className="flex flex-col justify-center items-center w-full h-20 lg:h-44 bg-gray-200 rounded-lg mr-2 lg:mr-5">
@@ -102,7 +106,8 @@ const AddVehicle = ({ dataType }) => {
                     </div>
                   ))
                 }</div>
-              ) : (
+                  )
+                : (
                 <div className="flex justify-between mt-5">
                   <div className="flex flex-col justify-center items-center w-full h-20 lg:h-44 bg-gray-200 rounded-lg mr-2 lg:mr-5">
                     <label htmlFor="images" className="flex items-center flex-col">
@@ -121,7 +126,7 @@ const AddVehicle = ({ dataType }) => {
                     </label>
                   </div>
                 </div>
-              )}
+                  )}
               <input type="file" name="images" id="images" multiple className="hidden" onChange={(e) => onFileChange(e)} accept="image/jpeg, image/png, image/jpg" />
             </div>
             <div className="w-full lg:w-1/2 pl-0 lg:pl-5">
@@ -161,10 +166,10 @@ const AddVehicle = ({ dataType }) => {
       </div>
       <Footer />
     </>
-  );
+  )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps () {
   const type = await fetch(`${process.env.NEXT_BACKEND_API}v1/category`)
   const dataType = await type.json()
 
@@ -175,4 +180,4 @@ export async function getServerSideProps() {
   }
 }
 
-export default AddVehicle;
+export default AddVehicle

@@ -1,11 +1,12 @@
-import Navbar from "../../../components/Navbar"
-import Image from "next/image"
-import Card from "../../../components/Card";
-import Footer from "../../../components/Footer";
-import { useRouter } from "next/dist/client/router";
+/* eslint-disable no-unused-vars */
+import Image from 'next/image'
+import { useRouter } from 'next/dist/client/router'
+import Navbar from '../../../components/Navbar'
+import Card from '../../../components/Card'
+import Footer from '../../../components/Footer'
 
 const Vehicle = ({ name }) => {
-   console.log(name)
+  console.log(name)
   return (
     <>
       <Navbar />
@@ -47,7 +48,7 @@ const Vehicle = ({ name }) => {
 
       <Footer />
     </>
-  );
+  )
 }
 
-export default Vehicle;
+export default Vehicle

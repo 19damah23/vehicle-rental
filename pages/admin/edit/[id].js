@@ -1,20 +1,21 @@
-import Navbar from "../../../components/Navbar"
-import Image from "next/image"
-import Footer from "../../../components/Footer"
-import Dropdown from "../../../components/Dropdown"
-import { useEffect, useState } from "react"
-import Router, { useRouter } from "next/router";
-import backendApi from "../../api/backendApi"
-import Link from "next/link"
-import { ToastContainer, toast, Zoom } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
+/* eslint-disable no-unused-vars */
+import Navbar from '../../../components/Navbar'
+import Image from 'next/image'
+import Dropdown from '../../../components/Dropdown'
+import { useEffect, useState } from 'react'
+import Router, { useRouter } from 'next/router'
+import backendApi from '../../api/backendApi'
+import Link from 'next/link'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { confirmAlert } from 'react-confirm-alert'
+import Footer from '../../../components/Footer'
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 const EditVehicle = ({ dataType }) => {
   const { query } = useRouter()
-  const id = query.id
-  const [images, setImages] = useState([]);
+  const { id } = query
+  const [images, setImages] = useState([])
   const [imagesPreview] = [images.map((item) => URL.createObjectURL(item))]
   const [input, setInput] = useState({
     name: '',
@@ -25,7 +26,7 @@ const EditVehicle = ({ dataType }) => {
     category: 'cars',
     status: 'available',
     oldImage: []
-  });
+  })
 
   const confirm = (id) => {
     confirmAlert({
@@ -41,7 +42,7 @@ const EditVehicle = ({ dataType }) => {
           onClick: () => toast.error('Cancelled!', { position: toast.POSITION.TOP_CENTER })
         }
       ]
-    });
+    })
   }
 
   const setData = (data) => {
@@ -53,7 +54,7 @@ const EditVehicle = ({ dataType }) => {
       stock: data.stock,
       category: data.category,
       status: data.status,
-      oldImage: data.images,
+      oldImage: data.images
     })
   }
 
@@ -69,27 +70,27 @@ const EditVehicle = ({ dataType }) => {
   }, [id])
 
   const handleInput = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     console.log(e.target.name, e.target.value)
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
-    });
-  };
+      [e.target.name]: e.target.value
+    })
+  }
 
   const onFileChange = (e) => {
-    setImages([...e.target.files]);
-  };
+    setImages([...e.target.files])
+  }
 
   const setStock = (params) => {
-    if (params === "plus") {
+    if (params === 'plus') {
       setInput({
         ...input,
         stock: input.stock + 1
       })
     }
 
-    if (params === "minus") {
+    if (params === 'minus') {
       setInput({
         ...input,
         stock: input.stock - 1
@@ -98,9 +99,9 @@ const EditVehicle = ({ dataType }) => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const files = document.querySelector('input[type="file"]').files
-    const data = new FormData();
+    e.preventDefault()
+    const { files } = document.querySelector('input[type="file"]')
+    const data = new FormData()
     data.append('name', input.name)
     data.append('location', input.location)
     data.append('description', input.description)
@@ -111,11 +112,11 @@ const EditVehicle = ({ dataType }) => {
     if (files.length > 0) {
       for (let i = 0; i < files.length; i++) {
         data.append('images', files[i])
-      };
+      }
     } else {
       for (let i = 0; i < input.oldImage.length; i++) {
         data.append('images', input.oldImage[i])
-      };
+      }
     }
 
     backendApi.patch(`vehicles/${id}`, data, {
@@ -125,13 +126,13 @@ const EditVehicle = ({ dataType }) => {
         toast.success('Successfully update vehicle!', { position: toast.POSITION.TOP_CENTER })
 
         setTimeout(() => {
-          Router.push(`/admin/vehicle`)
-        }, 2500);
+          Router.push('/admin/vehicle')
+        }, 2500)
       })
       .catch((error) => {
         alert(error.response.data.message)
       })
-  };
+  }
 
   const handleDelete = (id) => {
     backendApi.delete(`vehicles/${id}`, {
@@ -141,8 +142,8 @@ const EditVehicle = ({ dataType }) => {
         toast.success('Successfully delete vehicle!', { position: toast.POSITION.TOP_CENTER })
 
         setTimeout(() => {
-          Router.push(`/admin/vehicle`)
-        }, 2500);
+          Router.push('/admin/vehicle')
+        }, 2500)
       })
       .catch((error) => {
         alert(error.response.data.message)
@@ -166,21 +167,26 @@ const EditVehicle = ({ dataType }) => {
           <div className="flex flex-col lg:flex-row justify-between mt-10 lg:mt-24">
             <div className="w-full lg:w-1/2 pr-0 lg:pr-5">
               <div className="flex flex-col justify-center items-center w-full h-48 lg:h-96 bg-gray-200 rounded-lg relative">
-                {imagesPreview[0] ? (
+                {imagesPreview[0]
+                  ? (
                   <img src={imagesPreview[0]} alt="camera" className="w-full h-full rounded-md" />
-                ) : input.oldImage ? (
+                    )
+                  : input.oldImage
+                    ? (
                   <img src={`http://localhost:4000/files/${input.oldImage[0]}`} alt="camera" className="w-full h-full rounded-md" />
-                ) : (
+                      )
+                    : (
                   <label htmlFor="images" className="flex items-center flex-col">
                     <div className="h-16 w-20 lg:h-28 lg:w-28">
                       <Image src="/camera.png" alt="camera" height="110px" width="130px" />
                     </div>
                     <p className="text-gray-400 mt-5">Click to add image</p>
                   </label>
-                )}
+                      )}
               </div>
 
-              {imagesPreview[1] ? (
+              {imagesPreview[1]
+                ? (
                 <div className="flex justify-between mt-5 overflow-x-scroll">{
                   imagesPreview.map((item) => (
                     <div className="flex flex-col justify-center items-center w-full h-20 lg:h-44 bg-gray-200 rounded-lg mr-2 lg:mr-5">
@@ -188,7 +194,8 @@ const EditVehicle = ({ dataType }) => {
                     </div>
                   ))
                 }</div>
-              ) : (
+                  )
+                : (
                 <div className="flex justify-between mt-5">
                   <div className="flex flex-col justify-center items-center w-full h-20 lg:h-44 bg-gray-200 rounded-lg mr-2 lg:mr-5">
                     <label htmlFor="images" className="flex items-center flex-col">
@@ -207,7 +214,7 @@ const EditVehicle = ({ dataType }) => {
                     </label>
                   </div>
                 </div>
-              )}
+                  )}
               <input type="file" name="images" id="images" multiple className="hidden" onChange={(e) => onFileChange(e)} accept="image/jpeg, image/png, image/jpg" />
             </div>
             <div className="w-full lg:w-1/2 pl-0 lg:pl-6">
@@ -219,16 +226,16 @@ const EditVehicle = ({ dataType }) => {
                 <input type="text" name="price" id="price" placeholder="Type the price" className="px-4 py-3 lg:py-4 rounded-md bg-gray-200 text-gray-400 text-lg lg:text-2xl focus:outline-none mt-2 lg:mt-4" value={input.price} onChange={handleInput} />
               </div>
               <div className="flex flex-col mt-4 lg:mt-6">
-                <Dropdown title="Status :" name="status" id="status" list={[{title: 'available'}, {title: 'full booked'}]} handleChange={handleInput} titleClass="fontPlayfair font-bold text-lg lg:text-2xl mt-2" classSelect="px-4 py-3 lg:py-4 rounded-md bg-gray-200 text-gray-400 text-lg lg:text-2xl focus:outline-none mt-2 lg:mt-4" />
+                <Dropdown title="Status :" name="status" id="status" list={[{ title: 'available' }, { title: 'full booked' }]} handleChange={handleInput} titleClass="fontPlayfair font-bold text-lg lg:text-2xl mt-2" classSelect="px-4 py-3 lg:py-4 rounded-md bg-gray-200 text-gray-400 text-lg lg:text-2xl focus:outline-none mt-2 lg:mt-4" />
               </div>
               <div className="flex justify-between items-center mt-4 lg:mt-6">
                 <label htmlFor="stock" className="fontPlayfair font-bold text-lg lg:text-2xl">Stock :</label>
                 <div className="flex items-center justify-between">
-                  <button type="button" className="px-2 py-2 w-8 h-8 bg-yellow-400 hover:bg-yellow-500 rounded-md" onClick={() => setStock("plus")}>
+                  <button type="button" className="px-2 py-2 w-8 h-8 bg-yellow-400 hover:bg-yellow-500 rounded-md" onClick={() => setStock('plus')}>
                     <Image src="/plus.png" alt="plus" height="20px" width="20px" />
                   </button>
                   <span className="text-2xl font-black mx-8 lg:mx-16">{input.stock}</span>
-                  <button type="button" className="px-2 w-8 h-8 bg-gray-300 hover:bg-gray-400 rounded-md flex items-center" onClick={() => setStock("minus")}>
+                  <button type="button" className="px-2 w-8 h-8 bg-gray-300 hover:bg-gray-400 rounded-md flex items-center" onClick={() => setStock('minus')}>
                     <Image src="/minus.png" alt="minus" height="8px" width="20px" />
                   </button>
                 </div>
@@ -250,10 +257,10 @@ const EditVehicle = ({ dataType }) => {
       </div>
       <Footer />
     </>
-  );
+  )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps () {
   const type = await fetch(`${process.env.NEXT_BACKEND_API}v1/category`)
   const dataType = await type.json()
 
@@ -264,4 +271,4 @@ export async function getServerSideProps() {
   }
 }
 
-export default EditVehicle;
+export default EditVehicle

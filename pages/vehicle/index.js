@@ -1,10 +1,10 @@
-import Navbar from "../../components/Navbar"
-import Image from "next/image"
-import Card from "../../components/Card";
-import Footer from "../../components/Footer";
+/* eslint-disable no-unused-vars */
+import Image from 'next/image'
+import Navbar from '../../components/Navbar'
+import Card from '../../components/Card'
+import Footer from '../../components/Footer'
 
-const Vehicle = () => {
-  return (
+const Vehicle = () => (
     <>
       <Navbar />
 
@@ -89,7 +89,6 @@ const Vehicle = () => {
 
       <Footer />
     </>
-  );
-}
+)
 
-export default Vehicle;
+export default Vehicle

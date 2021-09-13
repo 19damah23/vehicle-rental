@@ -1,13 +1,14 @@
-import Dropdown from "../../components/Dropdown"
-import Navbar from "../../components/Navbar"
-import Image from "next/image"
-import Star from "../../components/Star"
-import Card from "../../components/Card"
-import Footer from "../../components/Footer"
-import Link from "next/link"
-import { requireAuthentication } from "../../HOC/requireAuthentication/requireAuthentication"
-import cookies from "next-cookies"
-import { useContext } from "react"
+/* eslint-disable no-unused-vars */
+import Image from 'next/image'
+import Link from 'next/link'
+import cookies from 'next-cookies'
+import { useContext } from 'react'
+import Dropdown from '../../components/Dropdown'
+import Navbar from '../../components/Navbar'
+import Star from '../../components/Star'
+import Card from '../../components/Card'
+import Footer from '../../components/Footer'
+import { requireAuthentication } from '../../HOC/requireAuthentication/requireAuthentication'
 
 const Home = ({ dataVehicle, dataType, dataLocation }, ctx) => {
   const { role } = cookies(useContext)
@@ -38,7 +39,7 @@ const Home = ({ dataVehicle, dataType, dataLocation }, ctx) => {
       <div className="container mx-auto py-10 lg:py-20">
         <div className="flex justify-between">
           <h3 className="font-bold text-xl lg:text-4xl fontPlayfair">Popular in town</h3>
-          <Link href={role === 'admin' ? `/admin/vehicle` : `/vehicle`}>
+          <Link href={role === 'admin' ? '/admin/vehicle' : '/vehicle'}>
             <a className="flex items-center text-yellow-400 text-xs lg:text-base">
               Show all <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -96,10 +97,10 @@ const Home = ({ dataVehicle, dataType, dataLocation }, ctx) => {
 
       <Footer />
     </>
-  );
+  )
 }
 
-export default Home;
+export default Home
 
 export const getServerSideProps = requireAuthentication(
   async (ctx) => {

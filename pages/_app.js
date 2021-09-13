@@ -1,8 +1,9 @@
-import "tailwindcss/tailwind.css";
-import Head from "next/head";
-import "../styles/index.css";
+import 'tailwindcss/tailwind.css'
+// eslint-disable-next-line no-unused-vars
+// import Head from 'next/head'
+import '../styles/index.css'
 
-function MyApp({ Component, pageProps }) {
+function MyApp ({ Component, pageProps }) {
   return (
     <>
       <Head>
@@ -15,7 +16,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Component {...pageProps} />
     </>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp

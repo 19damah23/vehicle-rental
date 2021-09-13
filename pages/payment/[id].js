@@ -1,14 +1,15 @@
-import Footer from "../../components/Footer";
-import Navbar from "../../components/Navbar";
-import Image from "next/image";
-import Link from "next/link";
-import Dropdown from "../../components/Dropdown";
-import { useEffect, useState } from "react";
-import backendApi from "../api/backendApi";
-import { ToastContainer, toast, Zoom } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+/* eslint-disable no-unused-vars */
+import Footer from '../../components/Footer'
+import Navbar from '../../components/Navbar'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import backendApi from '../api/backendApi'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import cookies from 'next-cookies'
-import Router from "next/router";
+import Router from 'next/router'
+import Dropdown from '../../components/Dropdown'
 
 const Payment = ({ data }, req) => {
   const [form, setForm] = useState({
@@ -33,7 +34,7 @@ const Payment = ({ data }, req) => {
         toast.success('Transaction in process!', { position: toast.POSITION.TOP_CENTER })
         setTimeout(() => {
           Router.push('/history')
-        }, 2500);
+        }, 2500)
       })
       .catch((error) => {
         toast.error(error.response.data.message, { position: toast.POSITION.TOP_CENTER })
@@ -85,18 +86,18 @@ const Payment = ({ data }, req) => {
           <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-6 lg:mt-12 flex flex-col lg:flex-row">
             <div className="w-full lg:w-1/3 lg:mr-12 flex flex-col">
               <p className="border rounded-md font-bold text-lg px-7 py-4 lg:text-2xl lg:px-16 lg:py-9 max-w-md">
-                Quantity : {item.qty + ' ' + item.category}
+                Quantity : {`${item.qty} ${item.category}`}
               </p>
               <div className="flex flex-col border rounded-md px-7 py-4 lg:pl-16 lg:py-9 mt-4 lg:mt-6">
                 <p className="font-extrabold text-lg lg:text-2xl">Order details :</p>
-                <p className="font-base text-lg lg:text-2xl mt-2">{item.qty + ' ' + item.category} : Rp. {item.subTotal}</p>
+                <p className="font-base text-lg lg:text-2xl mt-2">{`${item.qty} ${item.category}`} : Rp. {item.subTotal}</p>
                 <p className="font-bold text-lg lg:text-2xl mt-10">Total : {item.subTotal}</p>
               </div>
             </div>
             <div className="w-full lg:w-2/3 flex flex-col mt-4 lg:mt-0">
               <div className="flex flex-col lg:flex-row justify-between border rounded-md py-4 px-7 lg:px-16 lg:py-9">
                 <p className="font-extrabold text-lg lg:text-2xl">Reservation Date :</p>
-                <p className="font-base text-lg lg:text-2xl">{item.startDate + ' to ' + item.expDate}</p>
+                <p className="font-base text-lg lg:text-2xl">{`${item.startDate} to ${item.expDate}`}</p>
               </div>
               <div className="flex flex-col border rounded-md py-4 px-7 lg:pl-16 lg:py-9 mt-4 lg:mt-6 h-full">
                 <p className="font-extrabold text-lg lg:text-2xl">Identity :</p>
@@ -125,17 +126,17 @@ const Payment = ({ data }, req) => {
 
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps (context) {
   try {
-    let cookie = cookies(context).token
+    const cookie = cookies(context).token
 
     const vehicle = await fetch(`${process.env.NEXT_BACKEND_API}v1/transactions/${context.params.id}`, {
       withCredentials: true,
       headers: {
-        Cookie: 'token='+cookie
+        Cookie: `token=${cookie}`
       }
     })
     const data = await vehicle.json()
@@ -157,4 +158,4 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default Payment;
+export default Payment

@@ -1,31 +1,31 @@
-import Footer from "../../../components/Footer"
-import Navbar from "../../../components/Navbar"
-import Image from "next/image"
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import backendApi from "../../api/backendApi"
-import { ToastContainer, toast, Zoom } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useRouter } from "next/router";
+/* eslint-disable no-unused-vars */
+import Footer from '../../../components/Footer'
+import Navbar from '../../../components/Navbar'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import backendApi from '../../api/backendApi'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useRouter } from 'next/router'
 import cookies from 'next-cookies'
 
 const Vehicle = ({ data, user }, req) => {
   const router = useRouter()
-  let { userId } = cookies(req)
+  const { userId } = cookies(req)
   const [form, setForm] = useState({
     vehiclesId: data.data[0].id,
-    userId: userId,
+    userId,
     qty: 1,
     days: 1,
     date: ''
   })
 
-
   const handleInput = (e) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
-    });
+      [e.target.name]: e.target.value
+    })
   }
 
   const handleQty = (params) => {
@@ -45,15 +45,15 @@ const Vehicle = ({ data, user }, req) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    backendApi.post(`transactions`, form, {
+    backendApi.post('transactions', form, {
       withCredentials: true,
-      origin: ['http://localhost:4000'] 
+      origin: ['http://localhost:4000']
     })
       .then((res) => {
         toast.success('Transaction success!', { position: toast.POSITION.TOP_CENTER })
         setTimeout(() => {
           router.push(`/payment/${res.data.data.id}`)
-        }, 2500);
+        }, 2500)
       })
       .catch((error) => {
         toast.error(error.response.data.message, { position: toast.POSITION.TOP_CENTER })
@@ -73,7 +73,7 @@ const Vehicle = ({ data, user }, req) => {
         </Link>
         <h3 className="font-bold text-4xl ml-14">Reservation</h3>
       </div>
-      {data.data && data.data.map(item => (
+      {data.data && data.data.map((item) => (
         <div key={item.id}>
           <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-16 flex flex-col lg:flex-row">
             <div className="w-full lg:w-2/3 mx-auto">
@@ -110,10 +110,10 @@ const Vehicle = ({ data, user }, req) => {
 
       <Footer />
     </>
-  );
+  )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps (context) {
   try {
     const id = context.params.vehicle
 
@@ -121,14 +121,15 @@ export async function getServerSideProps(context) {
     const data = await vehicle.json()
 
     return {
-      props: {data}
+      props: { data }
     }
   } catch (error) {
-    if(!context.req){
+    if (!context.req) {
+      // eslint-disable-next-line no-undef
       Router.push('/login')
     }
 
-    if(context.req){
+    if (context.req) {
       context.res.writeHead(301, {
         Location: 'http://localhost:3000/login'
       })
@@ -137,4 +138,4 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default Vehicle;
+export default Vehicle

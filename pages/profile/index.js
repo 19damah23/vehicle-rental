@@ -1,27 +1,28 @@
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
-import Image from "next/image";
-import cookies from "next-cookies";
-import { useEffect, useState } from "react";
-import backendApi from "../api/backendApi";
-import { requireAuthentication } from "../../HOC/requireAuthentication/requireAuthentication";
+/* eslint-disable no-unused-vars */
+import Image from 'next/image'
+import cookies from 'next-cookies'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { ToastContainer, toast, Zoom } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import backendApi from '../api/backendApi'
+import { requireAuthentication } from '../../HOC/requireAuthentication/requireAuthentication'
+import Footer from '../../components/Footer'
+import Navbar from '../../components/Navbar'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Profile = ({ data }, context) => {
   const router = useRouter()
   const [profile, setProfile] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    gender: "",
-    avatar: "",
-    address: "",
-    birth: "",
-    createdAt: "",
-    avatarPreview: "",
-  });
+    name: '',
+    email: '',
+    phone: '',
+    gender: '',
+    avatar: '',
+    address: '',
+    birth: '',
+    createdAt: '',
+    avatarPreview: ''
+  })
 
   useEffect(() => {
     setProfile({
@@ -33,54 +34,54 @@ const Profile = ({ data }, context) => {
       avatar: data[0].avatar,
       address: data[0].address,
       birth: data[0].birth,
-      createdAt: data[0].createdAt,
-    });
-  }, [data]);
+      createdAt: data[0].createdAt
+    })
+  }, [data])
 
   const handleInput = (e) => {
-    e.preventDefault();
-    console.log(e.target.name, e.target.value);
+    e.preventDefault()
+    console.log(e.target.name, e.target.value)
     setProfile({
       ...profile,
-      [e.target.name]: e.target.value,
-    });
-  };
+      [e.target.name]: e.target.value
+    })
+  }
 
   const handleInputFile = (e) => {
-    console.log(e);
+    console.log(e)
     setProfile({
       ...profile,
       avatar: e.target.files[0],
-      avatarPreview: URL.createObjectURL(e.target.files[0]),
-    });
-  };
+      avatarPreview: URL.createObjectURL(e.target.files[0])
+    })
+  }
 
   const handleSubmit = () => {
-    const { userId } = cookies(context);
+    const { userId } = cookies(context)
 
-    const files = document.querySelector('input[type="file"]').files[0];
-    const data = new FormData();
-    data.append("name", profile.name);
-    data.append("email", profile.email);
-    data.append("phone", profile.phone);
-    data.append("address", profile.address);
-    data.append("gender", profile.gender);
-    data.append("birth", profile.birth);
-    data.append("avatar", files);
+    const files = document.querySelector('input[type="file"]').files[0]
+    const data = new FormData()
+    data.append('name', profile.name)
+    data.append('email', profile.email)
+    data.append('phone', profile.phone)
+    data.append('address', profile.address)
+    data.append('gender', profile.gender)
+    data.append('birth', profile.birth)
+    data.append('avatar', files)
 
     backendApi
       .patch(`users/${userId}`, data, {
         withCredentials: true,
-        origin: ["http://localhost:4000"],
+        origin: ['http://localhost:4000']
       })
       .then((res) => {
         backendApi
           .get(`users/${userId}`, {
             withCredentials: true,
-            origin: ["http://localhost:4000"],
+            origin: ['http://localhost:4000']
           })
           .then((res) => {
-            const data = res.data.data;
+            const { data } = res.data
             setProfile({
               ...profile,
               name: data[0].name,
@@ -90,29 +91,29 @@ const Profile = ({ data }, context) => {
               avatar: data[0].avatar,
               address: data[0].address,
               birth: data[0].birth,
-              createdAt: data[0].createdAt,
-            });
+              createdAt: data[0].createdAt
+            })
 
             toast.success('Success update profile!', { position: toast.POSITION.TOP_CENTER })
 
             setTimeout(() => {
               router.push('/')
-            }, 2500);
+            }, 2500)
           })
           .catch((error) => {
             console.log(error.response)
             toast.error(error.response.data.message, {
-              position: toast.POSITION.TOP_CENTER,
-            });
-          });
+              position: toast.POSITION.TOP_CENTER
+            })
+          })
       })
       .catch((error) => {
         console.log(error)
         toast.error(error.response.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      });
-  };
+          position: toast.POSITION.TOP_CENTER
+        })
+      })
+  }
 
   return (
     <>
@@ -124,25 +125,27 @@ const Profile = ({ data }, context) => {
 
         <div className="flex flex-col items-center mt-8 lg:mt-11">
           <div className="relative w-36 h-36 lg:w-52 lg:h-52">
-            {profile.avatarPreview ? (
+            {profile.avatarPreview
+              ? (
               <img
                 src={profile.avatarPreview}
                 alt="camera"
                 className="w-full h-full rounded-full"
               />
-            ) : (
+                )
+              : (
               <Image
                 src={
                   profile.avatar !== null
                     ? `http://localhost:4000/files/${profile.avatar}`
-                    : "/people.png"
+                    : '/people.png'
                 }
                 alt="people"
                 width="215px"
                 height="215px"
                 className="rounded-full"
               />
-            )}
+                )}
             <label htmlFor="avatar" className="flex items-center flex-col">
               <svg
                 width="50"
@@ -177,7 +180,7 @@ const Profile = ({ data }, context) => {
             {profile.email}
           </p>
           <p className="font-bold text-lg lg:text-2xl text-gray-400 mt-0 lg:mt-1">
-            {profile.phone !== null ? profile.phone : ""}
+            {profile.phone !== null ? profile.phone : ''}
           </p>
           <p className="font-bold text-lg lg:text-2xl text-gray-400 mt-0 lg:mt-1">
             Has been active since {profile.createdAt.slice(0, 4)}
@@ -190,7 +193,7 @@ const Profile = ({ data }, context) => {
               id="male"
               name="gender"
               value="male"
-              checked={profile.gender === "male"}
+              checked={profile.gender === 'male'}
               className="w-4 h-4 lg:w-7 lg:h-7"
               onChange={handleInput}
             />
@@ -204,7 +207,7 @@ const Profile = ({ data }, context) => {
               id="female"
               name="gender"
               value="female"
-              checked={profile.gender === "female"}
+              checked={profile.gender === 'female'}
               className="w-4 h-4 lg:w-7 lg:h-7"
               onChange={handleInput}
             />
@@ -261,7 +264,7 @@ const Profile = ({ data }, context) => {
               name="phone"
               placeholder="Mobile number"
               className="py-2 lg:py-4 border-b focus:outline-none bg-white border-black text-black text-lg lg:text-2xl"
-              value={profile.phone !== null ? profile.phone : ""}
+              value={profile.phone !== null ? profile.phone : ''}
               onChange={handleInput}
             />
           </div>
@@ -300,7 +303,7 @@ const Profile = ({ data }, context) => {
                 name="birth"
                 placeholder="Birth date"
                 className="py-2 lg:py-4 border-b focus:outline-none bg-white border-black text-black text-lg lg:text-2xl"
-                value={profile.birth !== null ? profile.birth : ""}
+                value={profile.birth !== null ? profile.birth : ''}
                 onChange={handleInput}
               />
             </div>
@@ -332,26 +335,26 @@ const Profile = ({ data }, context) => {
 
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile
 
 export const getServerSideProps = requireAuthentication(async (ctx) => {
-  const { userId, token } = cookies(ctx);
+  const { userId, token } = cookies(ctx)
 
   const user = await fetch(
     `${process.env.NEXT_BACKEND_API}v1/users/${userId}`,
     {
       withCredentials: true,
       headers: {
-        Cookie: "token=" + token,
-      },
+        Cookie: `token=${token}`
+      }
     }
-  );
-  const data = await user.json();
+  )
+  const data = await user.json()
 
   return {
-    props: data,
-  };
-});
+    props: data
+  }
+})

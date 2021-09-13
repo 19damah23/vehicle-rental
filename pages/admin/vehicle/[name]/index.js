@@ -1,30 +1,31 @@
-import Navbar from "../../../../components/Navbar"
-import Card from "../../../../components/Card";
-import Footer from "../../../../components/Footer";
-import { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
-import backendApi from "../../../api/backendApi";
-import Link from "next/link";
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from 'react'
+import ReactPaginate from 'react-paginate'
+import Link from 'next/link'
+import Navbar from '../../../../components/Navbar'
+import Card from '../../../../components/Card'
+import Footer from '../../../../components/Footer'
+import backendApi from '../../../api/backendApi'
 
 const Vehicle = ({ name }) => {
   const [data, setData] = useState([])
   const [totalPage, setTotalPage] = useState(0)
   const [perPage, setPerPage] = useState(5)
   const [page, setPage] = useState(1)
-  const [orderBy, setOrderBy] = useState("name")
-  const [sort, setSort] = useState("ASC")
+  const [orderBy, setOrderBy] = useState('name')
+  const [sort, setSort] = useState('ASC')
 
   useEffect(() => {
     backendApi.get(`vehicles?page=${page}&perPage=${perPage}&orderBy=${orderBy}&sortBy=${sort}`)
-    .then((res) => {
-      const meta = res.data.meta
-      const data = res.data.data
-      setTotalPage(meta.totalPage)
-      setData(data)
-    })
-    .catch((err) => {
-      console.log(err.response.data.message)
-    })
+      .then((res) => {
+        const { meta } = res.data
+        const { data } = res.data
+        setTotalPage(meta.totalPage)
+        setData(data)
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
   }, [sort, page, perPage, orderBy])
 
   const handleChangePage = (e) => {
@@ -63,21 +64,21 @@ const Vehicle = ({ name }) => {
         </div>
 
         <ReactPaginate
-        previousLabel={"prev"}
-        nextLabel={"next"}
-        breakLabel={"..."}
-        breakClassName={"breack-me"}
+        previousLabel={'prev'}
+        nextLabel={'next'}
+        breakLabel={'...'}
+        breakClassName={'breack-me'}
         pageCount={totalPage}
         marginPagesDisplayed={5}
-        containerClassName={"pagination"}
-        subContainerClassName={"pages-pagination"}
-        activeClassName={"active"}
+        containerClassName={'pagination'}
+        subContainerClassName={'pages-pagination'}
+        activeClassName={'active'}
         onPageChange={handleChangePage} />
       </div>
 
       <Footer />
     </>
-  );
+  )
 }
 
-export default Vehicle;
+export default Vehicle

@@ -1,38 +1,39 @@
-import Footer from "../../../components/Footer"
-import Navbar from "../../../components/Navbar"
-import Image from "next/image";
-import Dropdown from "../../../components/Dropdown"
-import { useEffect, useState } from "react";
-import Card from "../../../components/Card";
-import ReactPaginate from "react-paginate";
-import backendApi from "../../api/backendApi";
-import Link from "next/link";
+/* eslint-disable no-unused-vars */
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import ReactPaginate from 'react-paginate'
+import Link from 'next/link'
+import Footer from '../../../components/Footer'
+import Navbar from '../../../components/Navbar'
+import Dropdown from '../../../components/Dropdown'
+import Card from '../../../components/Card'
+import backendApi from '../../api/backendApi'
 
 const History = () => {
   const [data, setData] = useState([])
   const [totalPage, setTotalPage] = useState(0)
   const [perPage, setPerPage] = useState(3)
   const [page, setPage] = useState(1)
-  const [orderBy, setOrderBy] = useState("category")
-  const [sort, setSort] = useState("ASC")
+  const [orderBy, setOrderBy] = useState('category')
+  const [sort, setSort] = useState('ASC')
   const [query, setQuery] = useState('')
 
   useEffect(() => {
     backendApi.get(`transactions/admin/history?page=${page}&perPage=${perPage}&orderBy=${orderBy}&sortBy=${sort}&search=${query}`, {
       withCredentials: true,
-      origin: ["http://localhost:4000"],
+      origin: ['http://localhost:4000']
     })
-    .then((res) => {
-      console.log(res)
-      const meta = res.data.meta
-      const data = res.data.data
-      setTotalPage(meta.totalPage)
-      setData(data)
-    })
-    .catch((err) => {
-      console.log('error')
-      console.log(err.response.data.message)
-    })
+      .then((res) => {
+        console.log(res)
+        const { meta } = res.data
+        const { data } = res.data
+        setTotalPage(meta.totalPage)
+        setData(data)
+      })
+      .catch((err) => {
+        console.log('error')
+        console.log(err.response.data.message)
+      })
   }, [sort, page, perPage, orderBy, query])
 
   const handleChangePage = (e) => {
@@ -62,7 +63,7 @@ const History = () => {
                 <Image src="/search.png" alt="search" width="30px" height="30px" />
               </div>
             </div>
-            <Dropdown list={[{title: "category"}, {title: "name"}]} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md text-black bg-white border text-sm lg:text-base focus:outline-none lg:mr-4 h-16 w-60" handleChange={handleOrder} />
+            <Dropdown list={[{ title: 'category' }, { title: 'name' }]} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md text-black bg-white border text-sm lg:text-base focus:outline-none lg:mr-4 h-16 w-60" handleChange={handleOrder} />
           </div>
 
           <div className="flex flex-col py-8 lg:py-16">
@@ -75,7 +76,7 @@ const History = () => {
                 </div>
                 <div className="flex flex-col justify-center ml-8 lg:ml-16">
                   <p className="text-base lg:text-2xl font-normal">{item.name}</p>
-                  <p className="text-sm lg:text-lg font-normal">{item.startDate + ' to ' + item.expDate}</p>
+                  <p className="text-sm lg:text-lg font-normal">{`${item.startDate} to ${item.expDate}`}</p>
                   <p className="text-base lg:text-2xl font-normal mt-2 lg:mt-4">Prepayment : Rp. {item.subTotal}</p>
                   <p className="text-base lg:text-2xl font-normal text-green-600">{item.status}</p>
                 </div>
@@ -84,15 +85,15 @@ const History = () => {
             ))}
           </div>
           <ReactPaginate
-            previousLabel={"prev"}
-            nextLabel={"next"}
-            breakLabel={"..."}
-            breakClassName={"breack-me"}
+            previousLabel={'prev'}
+            nextLabel={'next'}
+            breakLabel={'...'}
+            breakClassName={'breack-me'}
             pageCount={totalPage}
             marginPagesDisplayed={5}
-            containerClassName={"pagination"}
-            subContainerClassName={"pages-pagination"}
-            activeClassName={"active"}
+            containerClassName={'pagination'}
+            subContainerClassName={'pages-pagination'}
+            activeClassName={'active'}
             onPageChange={handleChangePage} />
         </div>
 
@@ -111,7 +112,7 @@ const History = () => {
 
       <Footer />
     </>
-  );
+  )
 }
 
-export default History;
+export default History
