@@ -1,4 +1,5 @@
-import Link from "next/link"
+/* eslint-disable no-unused-vars */
+import Link from 'next/link'
 
 const ListWithTitle = ({ title, list }) => {
   return (
@@ -14,7 +15,7 @@ const ListWithTitle = ({ title, list }) => {
         ))}
       </ul>
     </>
-  );
+  )
 }
 
-export default ListWithTitle;
+export default ListWithTitle

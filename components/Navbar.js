@@ -1,11 +1,12 @@
-import cookies from "next-cookies";
-import Image from "next/image"
+/* eslint-disable no-unused-vars */
+import cookies from 'next-cookies'
+import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import backendApi from "../pages/api/backendApi";
+import backendApi from '../pages/api/backendApi'
 
-const Navbar = (ctx, {profile}) => {
+const Navbar = (ctx, { profile }) => {
   const { isAuth, userId, role } = cookies(ctx)
   const [isMobile, setIsMobile] = useState(false)
   const [show, setShow] = useState(false)
@@ -23,19 +24,18 @@ const Navbar = (ctx, {profile}) => {
       .catch((error) => {
         console.log(error.response)
       })
-
   }, [profile])
 
   const logout = () => {
     backendApi.get('auth/logout', {
       withCredentials: true
     })
-    .then((res) => {
-      router.push('/login')
-    })
-    .catch((error) => {
-      console.log(error.response)
-    })
+      .then((res) => {
+        router.push('/login')
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
   }
 
   return (
@@ -53,11 +53,13 @@ const Navbar = (ctx, {profile}) => {
           <div>
             <button onClick={() => setIsMobile(!isMobile)} className="focus:outline-none text-black block lg:hidden">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {!isMobile ? (
+                {!isMobile
+                  ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                ) : (
+                    )
+                  : (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                )}
+                    )}
               </svg>
             </button>
           </div>
@@ -76,7 +78,7 @@ const Navbar = (ctx, {profile}) => {
               </Link>
             </li>
             <li className="mt-5 lg:mt-0 lg:mr-8 text-gray-600 hover:text-black focus:text-black text-base">
-              <Link href={role === 'admin' ? "/admin/history" : "/history"}>
+              <Link href={role === 'admin' ? '/admin/history' : '/history'}>
                 History
               </Link>
             </li>
@@ -85,7 +87,8 @@ const Navbar = (ctx, {profile}) => {
                 About
               </Link>
             </li>
-            {isAuth ? (
+            {isAuth
+              ? (
               <div className="flex flex-col lg:flex-row">
                 <li className="mt-5 lg:mt-0 lg:mr-5">
                   <Link href="/chat">
@@ -118,7 +121,8 @@ const Navbar = (ctx, {profile}) => {
                   </div>
                 </li>
               </div>
-            ) : (
+                )
+              : (
               <div className="flex flex-col lg:flex-row">
                 <li className="mt-5 lg:mt-0 lg:mr-5 border border-yellow-400 hover:bg-yellow-400 focus:bg-yellow-400 text-base w-28 h-10 flex items-center justify-center rounded-md">
                   <Link href="/login">
@@ -131,12 +135,12 @@ const Navbar = (ctx, {profile}) => {
                   </Link>
                 </li>
               </div>
-            )}
+                )}
           </ul>
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
 export default Navbar

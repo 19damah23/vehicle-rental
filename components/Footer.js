@@ -1,16 +1,17 @@
-import Image from "next/image"
-import { useState } from "react";
-import ListWithTitle from "./ListWithTitle";
+/* eslint-disable no-unused-vars */
+import Image from 'next/image'
+import { useState } from 'react'
+import ListWithTitle from './ListWithTitle'
 
 const Footer = () => {
   const [listDestinations, setListDestinations] = useState([
-    "Bali", "Yogyakarta", "Jakarta", "Kalimantan", "Malang"
+    'Bali', 'Yogyakarta', 'Jakarta', 'Kalimantan', 'Malang'
   ])
   const [listVehicles, setListVehicles] = useState([
-    "Bike", "Cars", "Motorbike", "Return Times", "FAQs"
+    'Bike', 'Cars', 'Motorbike', 'Return Times', 'FAQs'
   ])
   const [listInterests, setListInterests] = useState([
-    "Adventure Travel", "Art And Culture", "Wildlife And Nature", "Family Holidays", "Culinary Trip"
+    'Adventure Travel', 'Art And Culture', 'Wildlife And Nature', 'Family Holidays', 'Culinary Trip'
   ])
 
   return (
@@ -56,7 +57,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

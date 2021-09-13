@@ -1,8 +1,9 @@
-import Image from "next/image"
+/* eslint-disable no-unused-vars */
+import Image from 'next/image'
 
 const Card = ({ img, name, location, giveClass, loader, index }) => {
   return (
-    <div className={`relative ${giveClass ? giveClass : ''}`} key={index}>
+    <div className={`relative ${giveClass || ''}`} key={index}>
       <div className="w-36 h-40 lg:w-72 lg:h-80 mx-auto">
         <Image loader={loader} src={img} alt="img" width="275px" height="337px" className="rounded-md" />
       </div>
@@ -11,7 +12,7 @@ const Card = ({ img, name, location, giveClass, loader, index }) => {
         <span className="text-gray-400 text-xs lg:text-sm">{location}</span>
       </div>
     </div>
-  );
+  )
 }
 
-export default Card;
+export default Card
