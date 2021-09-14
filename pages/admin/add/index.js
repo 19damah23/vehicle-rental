@@ -170,7 +170,7 @@ const AddVehicle = ({ dataType }) => {
 }
 
 export async function getServerSideProps () {
-  const type = await fetch(`${process.env.NEXT_BACKEND_API}v1/category`)
+  const type = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/category`)
   const dataType = await type.json()
 
   return {

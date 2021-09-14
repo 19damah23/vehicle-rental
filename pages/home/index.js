@@ -11,7 +11,7 @@ import Footer from '../../components/Footer'
 import { requireAuthentication } from '../../HOC/requireAuthentication/requireAuthentication'
 
 const Home = ({ dataVehicle, dataType, dataLocation }, ctx) => {
-  const { role } = cookies(useContext)
+  const { role } = cookies(ctx)
 
   return (
     <>
@@ -104,13 +104,13 @@ export default Home
 
 export const getServerSideProps = requireAuthentication(
   async (ctx) => {
-    const res = await fetch(`${process.env.NEXT_BACKEND_API}v1/vehicles?perPage=4`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/vehicles?perPage=4`)
     const dataVehicle = await res.json()
 
-    const type = await fetch(`${process.env.NEXT_BACKEND_API}v1/category`)
+    const type = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/category`)
     const dataType = await type.json()
 
-    const location = await fetch(`${process.env.NEXT_BACKEND_API}v1/locations`)
+    const location = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/locations`)
     const dataLocation = await location.json()
 
     return {

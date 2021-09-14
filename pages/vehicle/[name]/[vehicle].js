@@ -117,7 +117,7 @@ export async function getServerSideProps (context) {
   try {
     const id = context.params.vehicle
 
-    const vehicle = await fetch(`${process.env.NEXT_BACKEND_API}v1/vehicles/${id}`)
+    const vehicle = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/vehicles/${id}`)
     const data = await vehicle.json()
 
     return {

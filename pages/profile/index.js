@@ -344,7 +344,7 @@ export const getServerSideProps = requireAuthentication(async (ctx) => {
   const { userId, token } = cookies(ctx)
 
   const user = await fetch(
-    `${process.env.NEXT_BACKEND_API}v1/users/${userId}`,
+    `${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/users/${userId}`,
     {
       withCredentials: true,
       headers: {

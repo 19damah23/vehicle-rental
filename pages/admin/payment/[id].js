@@ -21,7 +21,7 @@ const Payment = ({ data }, req) => {
   const handleSubmit = (id) => {
     backendApi.patch(`transactions/${id}`, form, {
       withCredentials: true,
-      origin: ['http://localhost:4000']
+      origin: ['https://vehicle.muchamadagushermawan.online']
     })
       .then(() => {
         toast.success('Transaction approved!', { position: toast.POSITION.TOP_CENTER })
@@ -53,7 +53,7 @@ const Payment = ({ data }, req) => {
           <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-12 flex flex-col lg:flex-row">
             <div className="w-full lg:w-1/3 lg:mr-12">
               <Image
-                src={`http://localhost:4000/files/${item.image}`}
+                src={`https://vehicle.muchamadagushermawan.online/files/${item.image}`}
                 alt="vehicle"
                 width="450px"
                 height="315px"
@@ -130,7 +130,7 @@ export default Payment
 export const getServerSideProps = requireAuthentication(async (ctx) => {
   const cookie = cookies(ctx).token
 
-  const vehicle = await fetch(`${process.env.NEXT_BACKEND_API}v1/transactions/${ctx.params.id}`, {
+  const vehicle = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/transactions/${ctx.params.id}`, {
     withCredentials: true,
     headers: {
       Cookie: `token=${cookie}`

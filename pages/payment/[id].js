@@ -133,7 +133,7 @@ export async function getServerSideProps (context) {
   try {
     const cookie = cookies(context).token
 
-    const vehicle = await fetch(`${process.env.NEXT_BACKEND_API}v1/transactions/${context.params.id}`, {
+    const vehicle = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/transactions/${context.params.id}`, {
       withCredentials: true,
       headers: {
         Cookie: `token=${cookie}`

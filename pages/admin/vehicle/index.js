@@ -55,7 +55,7 @@ const Vehicle = ({ data }) => {
           <div className="flex mt-8 mb-10 w-full flex-wrap">
             {searchData.map((item, index) => <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
                 <a className="mr-4">
-                  <Card name={item.name} location={item.location} img={`http://localhost:4000/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
+                  <Card name={item.name} location={item.location} img={`https://vehicle.muchamadagushermawan.online/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
                 </a>
               </Link>)}
           </div>
@@ -80,7 +80,7 @@ const Vehicle = ({ data }) => {
                 {items.map((item) => (
                   <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
                     <a className="mx-3 lg:mx-0 lg:mr-3">
-                      <Card name={item.name} location={item.location} img={`http://localhost:4000/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={item.id} />
+                      <Card name={item.name} location={item.location} img={`https://vehicle.muchamadagushermawan.online/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={item.id} />
                     </a>
                   </Link>
                 ))}
@@ -96,7 +96,7 @@ const Vehicle = ({ data }) => {
 }
 
 export async function getServerSideProps () {
-  const res = await fetch(`${process.env.NEXT_BACKEND_API}v1/vehicles/grouped`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/vehicles/grouped`)
   const data = await res.json()
 
   return { props: data }

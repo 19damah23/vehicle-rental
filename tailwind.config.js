@@ -5,34 +5,34 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: theme => ({
-       'home': "url('/bghome.jpg')",
-       'login': "url('/login.png')",
-       'register': "url('/register.png')",
-       'forgot': "url('/forgot.png')",
-      }),
+        home: "url('/bghome.jpg')",
+        login: "url('/login.png')",
+        register: "url('/register.png')",
+        forgot: "url('/forgot.png')"
+      })
     },
     fontFamily: {
-      'rubic': ['Rubik', 'sans-serif'],
+      rubic: ['Rubik', 'sans-serif']
     },
     screens: {
-      'xs': '350px',
+      xs: '350px',
       // => @media (max-width: 640px) { ... }
 
-      'sm': '576px',
-      // => @media (min-width: 640px) { ... } 
-  
-      'md': '768px',
+      sm: '576px',
+      // => @media (min-width: 640px) { ... }
+
+      md: '768px',
       // => @media (min-width: 768px) { ... }
-  
-      'lg': '992px',
+
+      lg: '992px',
       // => @media (min-width: 1024px) { ... }
-  
-      'xl': '1200px',
+
+      xl: '1200px'
       // => @media (min-width: 1280px) { ... }
     }
   },
   variants: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
+  plugins: []
 }

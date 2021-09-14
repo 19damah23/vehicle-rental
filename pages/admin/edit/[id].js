@@ -173,7 +173,7 @@ const EditVehicle = ({ dataType }) => {
                     )
                   : input.oldImage
                     ? (
-                  <img src={`http://localhost:4000/files/${input.oldImage[0]}`} alt="camera" className="w-full h-full rounded-md" />
+                  <img src={`https://vehicle.muchamadagushermawan.online/files/${input.oldImage[0]}`} alt="camera" className="w-full h-full rounded-md" />
                       )
                     : (
                   <label htmlFor="images" className="flex items-center flex-col">
@@ -261,7 +261,7 @@ const EditVehicle = ({ dataType }) => {
 }
 
 export async function getServerSideProps () {
-  const type = await fetch(`${process.env.NEXT_BACKEND_API}v1/category`)
+  const type = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/category`)
   const dataType = await type.json()
 
   return {
