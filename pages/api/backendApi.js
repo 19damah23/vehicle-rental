@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export default axios.create({
-  baseURL: 'https://vehicle.muchamadagushermawan.online/'
+  baseURL: 'https://vehicle.muchamadagushermawan.online/v1/'
 })
