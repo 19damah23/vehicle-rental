@@ -47,7 +47,7 @@ const Vehicle = ({ data, user }, req) => {
     e.preventDefault()
     backendApi.post('transactions', form, {
       withCredentials: true,
-      origin: ['http://localhost:4000']
+      origin: ['https://vehicle.muchamadagushermawan.online']
     })
       .then((res) => {
         toast.success('Transaction success!', { position: toast.POSITION.TOP_CENTER })
@@ -77,7 +77,7 @@ const Vehicle = ({ data, user }, req) => {
         <div key={item.id}>
           <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-16 flex flex-col lg:flex-row">
             <div className="w-full lg:w-2/3 mx-auto">
-              <Image src={`http://localhost:4000/files/${item.images[0]}`} alt="bike" width="696px" height="616px" />
+              <Image src={`https://vehicle.muchamadagushermawan.online/files/${item.images[0]}`} alt="bike" width="696px" height="616px" />
             </div>
             <div className="w-full lg:w-1/3 flex flex-col">
               <h1 className="fontPlayfair font-extrabold text-5xl">{item.name}</h1>
@@ -131,7 +131,7 @@ export async function getServerSideProps (context) {
 
     if (context.req) {
       context.res.writeHead(301, {
-        Location: 'http://localhost:3000/login'
+        Location: 'https://vehicle-rental.vercel.app/login'
       })
       context.res.end()
     }

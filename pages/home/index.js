@@ -52,7 +52,7 @@ const Home = ({ dataVehicle, dataType, dataLocation }, ctx) => {
           {dataVehicle.data && dataVehicle.data.map((item, index) => (
             <Link href={role === 'admin' ? `/admin/vehicle/${item.name}/${item.id}` : `/vehicle/${item.name}/${item.id}`} key={index}>
               <a className="mx-3 lg:mx-1">
-                <Card name={item.name} location={item.location} img={`http://localhost:4000/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" />
+                <Card name={item.name} location={item.location} img={`https://vehicle.muchamadagushermawan.online/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" />
               </a>
             </Link>
           ))}

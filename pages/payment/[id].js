@@ -28,7 +28,7 @@ const Payment = ({ data }, req) => {
   const handleSubmit = (id) => {
     backendApi.patch(`transactions/${id}`, form, {
       withCredentials: true,
-      origin: ['http://localhost:4000']
+      origin: ['https://vehicle.muchamadagushermawan.online']
     })
       .then(() => {
         toast.success('Transaction in process!', { position: toast.POSITION.TOP_CENTER })
@@ -59,7 +59,7 @@ const Payment = ({ data }, req) => {
           <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-12 flex flex-col lg:flex-row">
             <div className="w-full lg:w-1/3 lg:mr-12">
               <Image
-                src={`http://localhost:4000/files/${item.image}`}
+                src={`https://vehicle.muchamadagushermawan.online/files/${item.image}`}
                 alt="vehicle"
                 width="450px"
                 height="315px"
@@ -151,7 +151,7 @@ export async function getServerSideProps (context) {
 
     if (context.req) {
       context.res.writeHead(301, {
-        Location: 'http://localhost:3000/login'
+        Location: 'https://vehicle-rental.vercel.app/login'
       })
       context.res.end()
     }

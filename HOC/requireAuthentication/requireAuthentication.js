@@ -1,6 +1,6 @@
-import cookies from "next-cookies";
+import cookies from 'next-cookies'
 
-export function requireAuthentication(gssp) {
+export function requireAuthentication (gssp) {
   return async (context) => {
     const token = cookies(context).token
 
@@ -10,9 +10,9 @@ export function requireAuthentication(gssp) {
           destination: '/login',
           statusCode: 302
         }
-      };
+      }
     }
 
-    return await gssp(context);
+    return await gssp(context)
   }
 }

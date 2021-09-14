@@ -1,22 +1,22 @@
 module.exports = {
   images: {
-    domains: ['localhost'],
+    domains: ['https://vehicle.muchamadagushermawan.online']
   },
   reactStrictMode: true,
-  async rewrites() {
+  async rewrites () {
     return [
       {
         source: '/',
-        destination: '/home',
+        destination: '/home'
       },
       {
         source: '/login',
-        destination: '/auth/login',
+        destination: '/auth/login'
       },
       {
         source: '/register',
-        destination: '/auth/register',
+        destination: '/auth/register'
       }
     ]
-  },
+  }
 }
