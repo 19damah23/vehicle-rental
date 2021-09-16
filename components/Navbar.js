@@ -97,8 +97,8 @@ const Navbar = (ctx, { profile }) => {
                 </li>
                 <li className="mt-5 lg:mt-0 text-base relative">
                   <div>
-                    <button onClick={() => setShow(!show)}>
-                      <Image src={avatar ? `https://vehicle.muchamadagushermawan.online/files/${avatar}` : '/people.png'} width={40} height={40} alt="profile" className="rounded-full" />
+                    <button onClick={() => setShow(!show)} className="w-10 h-10 object-contain">
+                      <img src={avatar ? `https://vehicle.muchamadagushermawan.online/files/${avatar}` : '/people.png'} alt="profile" className="rounded-full h-full w-full object-cover" />
                     </button>
                   </div>
                   <div className={`${show === true ? 'block' : 'hidden'} ml-auto absolute z-10 bg-white rounded-md`}>
