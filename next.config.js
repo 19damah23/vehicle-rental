@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['https://vehicle.muchamadagushermawan.online']
+    domains: ['vehicle.muchamadagushermawan.online']
   },
   reactStrictMode: true,
   async rewrites () {

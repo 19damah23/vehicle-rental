@@ -7,11 +7,9 @@ import InputAuth from '../../../components/InputAuth'
 import backendApi from '../../api/backendApi'
 import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/router'
-import { useCookies } from 'react-cookie'
 
 const Login = () => {
   const router = useRouter()
-  const [cookie, setCookie] = useCookies(['token', 'userId', 'role', 'isAuth'])
   const [form, setForm] = useState({
     email: '',
     password: ''
@@ -28,29 +26,7 @@ const Login = () => {
   const handleSubmit = () => {
     backendApi
       .post('auth/login', form, { withCredentials: true })
-      .then((res) => {
-        const userId = res.data.user.id
-        const token = res.data.token
-        setCookie('userId', userId, {
-          path: '/',
-          maxAge: 7200000,
-          sameSite: true
-        })
-        setCookie('role', res.data.user.role, {
-          path: '/',
-          maxAge: 7200000,
-          sameSite: true
-        })
-        setCookie('isAuth', true, {
-          path: '/',
-          maxAge: 7200000,
-          sameSite: true
-        })
-        setCookie('token', token, {
-          path: '/',
-          maxAge: 7200000,
-          sameSite: true
-        })
+      .then(() => {
         router.push('/')
       })
       .catch((error) => {
