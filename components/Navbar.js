@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import backendApi from '../pages/api/backendApi'
+import { requireAuthentication } from '../HOC/requireAuthentication/requireAuthentication'
 
-const Navbar = (ctx, { profile }) => {
-  const { isAuth, userId, role } = cookies(ctx)
+const Navbar = ({ profile, userId, role, isAuth }) => {
   const [isMobile, setIsMobile] = useState(false)
   const [show, setShow] = useState(false)
   const [avatar, setAvatar] = useState('')
@@ -144,3 +144,17 @@ const Navbar = (ctx, { profile }) => {
 }
 
 export default Navbar
+
+export const getServerSideProps = requireAuthentication(
+  async (ctx) => {
+    const { isAuth, userId, role } = cookies(ctx)
+
+    return {
+      props: {
+        isAuth,
+        userId,
+        role
+      }
+    }
+  }
+)
