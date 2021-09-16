@@ -8,6 +8,9 @@ import backendApi from '../pages/api/backendApi'
 import { requireAuthentication } from '../HOC/requireAuthentication/requireAuthentication'
 
 const Navbar = ({ profile, userId, role, isAuth }) => {
+  console.log(userId)
+  console.log(role)
+  console.log(isAuth)
   const [isMobile, setIsMobile] = useState(false)
   const [show, setShow] = useState(false)
   const [avatar, setAvatar] = useState('')
