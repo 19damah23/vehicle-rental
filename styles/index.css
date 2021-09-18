@@ -47,8 +47,8 @@ ul.pagination li.active {
   height: 315px;
 }
 
-.w-450 {
-  width: 450px;
+.w-400 {
+  width: 400px;
 }
 
 @media (max-width: 576px) {
@@ -57,7 +57,7 @@ ul.pagination li.active {
     height: 315px;
   }
   
-  .w-450,
+  .w-400,
   .w-696 {
     width: 100%;
   }
