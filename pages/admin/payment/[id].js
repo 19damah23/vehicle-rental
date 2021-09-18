@@ -137,7 +137,6 @@ export const getServerSideProps = requireAuthentication(async (ctx) => {
     }
   })
   const data = await vehicle.json()
-  console.log(data)
 
   return {
     props: data

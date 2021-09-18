@@ -43,11 +43,21 @@ ul.pagination li.active {
   width: 696px;
 }
 
+.h-315 {
+  height: 315px;
+}
+
+.w-450 {
+  width: 450px;
+}
+
 @media (max-width: 576px) {
+  .h-315,
   .h-616 {
-    height: 100%;
+    height: 315px;
   }
   
+  .w-450,
   .w-696 {
     width: 100%;
   }

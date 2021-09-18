@@ -58,13 +58,9 @@ const Payment = ({ data }, req) => {
         <div key={index}>
           <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-12 flex flex-col lg:flex-row">
             <div className="w-full lg:w-1/3 lg:mr-12">
-              <Image
-                src={`https://vehicle.muchamadagushermawan.online/files/${item.image}`}
-                alt="vehicle"
-                width="450px"
-                height="315px"
-                className="rounded-md"
-              />
+              <div className="w-450 object-contain h-315">
+                <img src={`https://vehicle.muchamadagushermawan.online/files/${item.image}`} alt={item.vehicle} className="object-cover w-full h-full rounded-md" />
+              </div>
             </div>
             <div className="w-full lg:w-2/3 flex flex-col">
               <h1 className="fontPlayfair font-extrabold text-3xl lg:text-5xl">
