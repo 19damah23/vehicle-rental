@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import backendApi from '../pages/api/backendApi'
 
 const Navbar = (ctx, { profile }) => {
-  const { isAuth, userId, role } = cookies(ctx)
+  const { userId, role } = cookies(ctx)
   const [isMobile, setIsMobile] = useState(false)
   const [show, setShow] = useState(false)
   const [avatar, setAvatar] = useState('')
@@ -55,10 +55,10 @@ const Navbar = (ctx, { profile }) => {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {!isMobile
                   ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                     )
                   : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     )}
               </svg>
             </button>
@@ -87,55 +87,38 @@ const Navbar = (ctx, { profile }) => {
                 About
               </Link>
             </li>
-            {isAuth
-              ? (
-              <div className="flex flex-col lg:flex-row">
-                <li className="mt-5 lg:mt-0 lg:mr-5">
-                  <Link href="/chat">
-                    <Image src="/email.png" width={45} height={40} alt="chat" />
-                  </Link>
-                </li>
-                <li className="mt-5 lg:mt-0 text-base relative">
-                  <div>
-                    <button onClick={() => setShow(!show)} className="w-10 h-10 object-contain">
-                      <img src={avatar ? `https://vehicle.muchamadagushermawan.online/files/${avatar}` : '/people.png'} alt="profile" className="rounded-full h-full w-full object-cover" />
-                    </button>
-                  </div>
-                  <div className={`${show === true ? 'block' : 'hidden'} ml-auto absolute z-10 bg-white rounded-md`}>
-                    <ul>
-                      <li className="hover:bg-indigo-600 px-8 py-2 rounded-md hover:text-white">
-                        <Link href="/profile">
-                          <a>
-                            Profile
-                          </a>
-                        </Link>
-                      </li>
-                      <li className="hover:bg-indigo-600 px-8 py-2 rounded-md hover:text-white">
-                        <button onClick={logout}>
-                          <a>
-                            Logout
-                          </a>
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </div>
-                )
-              : (
-              <div className="flex flex-col lg:flex-row">
-                <li className="mt-5 lg:mt-0 lg:mr-5 border border-yellow-400 hover:bg-yellow-400 focus:bg-yellow-400 text-base w-28 h-10 flex items-center justify-center rounded-md">
-                  <Link href="/login">
-                    Login
-                  </Link>
-                </li>
-                <li className="mt-5 lg:mt-0 border border-yellow-400 hover:bg-yellow-400 focus:bg-yellow-400 text-base w-28 h-10 flex items-center justify-center rounded-md">
-                  <Link href="/register">
-                    Register
-                  </Link>
-                </li>
-              </div>
-                )}
+            <div className="flex flex-col lg:flex-row">
+              <li className="mt-5 lg:mt-0 lg:mr-5">
+                <Link href="/chat">
+                  <Image src="/email.png" width={45} height={40} alt="chat" />
+                </Link>
+              </li>
+              <li className="mt-5 lg:mt-0 text-base relative">
+                <div>
+                  <button onClick={() => setShow(!show)} className="w-10 h-10 object-contain">
+                    <img src={avatar ? `https://vehicle.muchamadagushermawan.online/files/${avatar}` : '/people.png'} alt="profile" className="rounded-full h-full w-full object-cover" />
+                  </button>
+                </div>
+                <div className={`${show === true ? 'block' : 'hidden'} ml-auto absolute z-10 bg-white rounded-md`}>
+                  <ul>
+                    <li className="hover:bg-indigo-600 px-8 py-2 rounded-md hover:text-white">
+                      <Link href="/profile">
+                        <a>
+                          Profile
+                        </a>
+                      </Link>
+                    </li>
+                    <li className="hover:bg-indigo-600 px-8 py-2 rounded-md hover:text-white">
+                      <button onClick={logout}>
+                        <a>
+                          Logout
+                        </a>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </div>
           </ul>
         </div>
       </div>
