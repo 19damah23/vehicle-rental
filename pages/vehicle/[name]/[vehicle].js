@@ -76,7 +76,8 @@ const Vehicle = ({ data, user }, req) => {
       {data.data && data.data.map((item) => (
         <div key={item.id}>
           <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-16 flex flex-col lg:flex-row">
-            <div className="w-full lg:w-2/3 mx-auto">
+            <div className="w-full lg:w-2/3 mx-auto object-contain h-616">
+              <img src={`https://vehicle.muchamadagushermawan.online/files/${item.images[0]}`} alt={item.name} className="object-cover w-full h-full rounded-md" />
               <Image src={`https://vehicle.muchamadagushermawan.online/files/${item.images[0]}`} alt="bike" width="696px" height="616px" />
             </div>
             <div className="w-full lg:w-1/3 flex flex-col">
