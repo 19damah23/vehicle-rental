@@ -38,3 +38,17 @@ ul.pagination li.active {
 .h-616 {
   height: 616px;
 }
+
+.w-696 {
+  width: 696px;
+}
+
+@media (max-width: 576px) {
+  .h-616 {
+    height: 100%;
+  }
+  
+  .w-696 {
+    width: 100%;
+  }
+}
