@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       backgroundImage: theme => ({
         home: "url('/bghome.jpg')",
+        about: "url('/bgabout.jpg')",
         login: "url('/login.png')",
         register: "url('/register.png')",
         forgot: "url('/forgot.png')"
