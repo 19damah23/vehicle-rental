@@ -73,7 +73,7 @@ const Navbar = (ctx, { profile }) => {
               </Link>
             </li>
             <li className="mt-5 lg:mt-0 lg:mr-8 text-gray-600 hover:text-black focus:text-black text-base">
-              <Link href="/category">
+              <Link href={role === 'admin' ? '/admin/vehicle' : '/vehicle'}>
                 Vehicle Type
               </Link>
             </li>

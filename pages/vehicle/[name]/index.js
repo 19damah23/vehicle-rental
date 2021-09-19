@@ -1,48 +1,85 @@
 /* eslint-disable no-unused-vars */
-import Image from 'next/image'
-import { useRouter } from 'next/dist/client/router'
-import Navbar from '../../../components/Navbar'
-import Card from '../../../components/Card'
-import Footer from '../../../components/Footer'
+import { useEffect, useState } from 'react'
+import ReactPaginate from 'react-paginate'
+import Link from 'next/link'
+import Navbar from '../../../../components/Navbar'
+import Card from '../../../../components/Card'
+import Footer from '../../../../components/Footer'
+import backendApi from '../../../api/backendApi'
+import { useRouter } from 'next/router'
+import { requireAuthentication } from '../../../HOC/requireAuthentication/requireAuthentication'
 
-const Vehicle = ({ name }) => {
+const Vehicle = () => {
+  const { query } = useRouter()
+  const [data, setData] = useState([])
+  const [totalPage, setTotalPage] = useState(0)
+  const [perPage, setPerPage] = useState(5)
+  const [page, setPage] = useState(1)
+  const [orderBy, setOrderBy] = useState('name')
+  const [sort, setSort] = useState('ASC')
+
+  useEffect(() => {
+    backendApi.get(`vehicles/${query.name}?page=${page}&orderBy=${orderBy}&perPage=${perPage}&sortBy=${sort}`, {
+      withCredentials: true,
+      origin: ['https://vehicle.muchamadagushermawan.online']
+    })
+      .then((res) => {
+        const { meta } = res.data
+        const { data } = res.data
+        setTotalPage(meta.totalPage)
+        setData(data)
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
+  }, [sort, page, perPage, orderBy])
+
+  const handleChangePage = (e) => {
+    setPage(e.selected + 1)
+  }
+
+  const handlePerPage = (e) => {
+    setPerPage(e.target.value)
+  }
+
+  const handleOrderBy = (e) => {
+    setOrderBy(e.target.value)
+  }
+
+  const handleSortBy = (e) => {
+    setSort(e.target.value)
+  }
   return (
     <>
       <Navbar />
 
-      <div className="xs:container sm:container md:container lg:container xl:container mx-auto py-20">
+      <div className="xs:container sm:container md:container lg:container xl:container mx-auto py-20 mt lg:pt-40">
         <div className="flex flex-col">
-          <h3 className="font-bold text-4xl fontPlayfair">Popular in town</h3>
+          <h3 className="font-bold text-4xl fontPlayfair">{query.name} in town</h3>
           <span className="mt-6 text-gray-400 text-center">Click item to see details and reservation</span>
         </div>
 
-        <div className="flex justify-between mt-12">
-          <Card name="Merapi" location="Yogyakarta" img="/img1.png" />
-          <Card name="Teluk Bogam" location="Kalimantan" img="/img2.png" />
-          <Card name="Bromo" location="Malang" img="/img3.png" />
-          <Card name="Malioboro" location="Yogyakarta" img="/img4.png" />
+        <div className="flex mt-8 w-full flex-wrap">
+          {data && data.map((item, index) => (
+            <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
+              <a className="mx-3 lg:mx-0 lg:mr-3">
+                <Card name={item.name} location={item.location} img={`https://vehicle.muchamadagushermawan.online/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
+              </a>
+            </Link>
+          ))}
         </div>
 
-        <div className="flex justify-between mt-12">
-          <Card name="Van" location="Yogyakarta" img="/img5.png" />
-          <Card name="Lamborghini" location="Shout Jakarta" img="/img6.png" />
-          <Card name="Jeep" location="Malang" img="/img7.png" />
-          <Card name="White Jeep" location="Kalimantan" img="/img8.png" />
-        </div>
-
-        <div className="flex justify-between mt-12">
-          <Card name="Vespa" location="Yogyakarta" img="/img9.png" />
-          <Card name="Honda KLX" location="Kalimantan" img="/img10.png" />
-          <Card name="Honda" location="Malang" img="/img11.png" />
-          <Card name="Matic Bike" location="Yogyakarta" img="/img12.png" />
-        </div>
-
-        <div className="flex justify-between mt-12">
-          <Card name="Fixie" location="Yogyakarta" img="/img13.png" />
-          <Card name="Sport Bike" location="Kalimantan" img="/img14.png" />
-          <Card name="Onthel" location="Malang" img="/img15.png" />
-          <Card name="Fixie Gray" location="Yogyakarta" img="/img16.png" />
-        </div>
+        <ReactPaginate
+        previousLabel={'prev'}
+        nextLabel={'next'}
+        breakLabel={'...'}
+        breakClassName={'breack-me'}
+        pageCount={totalPage}
+        marginPagesDisplayed={5}
+        containerClassName={'pagination'}
+        subContainerClassName={'pages-pagination'}
+        activeClassName={'active'}
+        onPageChange={handleChangePage} />
       </div>
 
       <Footer />
@@ -51,3 +88,9 @@ const Vehicle = ({ name }) => {
 }
 
 export default Vehicle
+
+export const getServerSideProps = requireAuthentication(async (ctx) => {
+  return {
+    props: {}
+  }
+})

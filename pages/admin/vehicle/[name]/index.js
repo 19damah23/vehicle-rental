@@ -6,8 +6,11 @@ import Navbar from '../../../../components/Navbar'
 import Card from '../../../../components/Card'
 import Footer from '../../../../components/Footer'
 import backendApi from '../../../api/backendApi'
+import { useRouter } from 'next/router'
+import { requireAuthentication } from '../../../../HOC/requireAuthentication/requireAuthentication'
 
-const Vehicle = ({ name }) => {
+const Vehicle = () => {
+  const { query } = useRouter()
   const [data, setData] = useState([])
   const [totalPage, setTotalPage] = useState(0)
   const [perPage, setPerPage] = useState(5)
@@ -16,15 +19,18 @@ const Vehicle = ({ name }) => {
   const [sort, setSort] = useState('ASC')
 
   useEffect(() => {
-    backendApi.get(`vehicles?page=${page}&perPage=${perPage}&orderBy=${orderBy}&sortBy=${sort}`)
+    backendApi.get(`vehicles/${query.name}?page=${page}&orderBy=${orderBy}&perPage=${perPage}&sortBy=${sort}`, {
+      withCredentials: true,
+      origin: ['https://vehicle.muchamadagushermawan.online']
+    })
       .then((res) => {
         const { meta } = res.data
         const { data } = res.data
         setTotalPage(meta.totalPage)
         setData(data)
       })
-      .catch((err) => {
-        console.log(err.response.data.message)
+      .catch((error) => {
+        console.log(error.response)
       })
   }, [sort, page, perPage, orderBy])
 
@@ -49,7 +55,7 @@ const Vehicle = ({ name }) => {
 
       <div className="xs:container sm:container md:container lg:container xl:container mx-auto py-20 mt lg:pt-40">
         <div className="flex flex-col">
-          <h3 className="font-bold text-4xl fontPlayfair">Popular in town</h3>
+          <h3 className="font-bold text-4xl fontPlayfair">{query.name} in town</h3>
           <span className="mt-6 text-gray-400 text-center">Click item to see details and reservation</span>
         </div>
 
@@ -82,3 +88,9 @@ const Vehicle = ({ name }) => {
 }
 
 export default Vehicle
+
+export const getServerSideProps = requireAuthentication(async (ctx) => {
+  return {
+    props: {}
+  }
+})

@@ -50,28 +50,8 @@ const Vehicle = ({ data }) => {
         <div className="xs:container sm:container md:container lg:container xl:container mx-auto pt-20">
           <div className="flex justify-between">
             <h3 className="font-bold text-xl lg:text-4xl fontPlayfair">
-              Popular in town
+              search results for {query}
             </h3>
-            <Link
-              href="/vehicle/popular"
-              className="text-yellow-400 flex items-center"
-            >
-              <a className="text-yellow-400 flex items-center">
-                Show all{' '}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </a>
-            </Link>
           </div>
 
           <div className="flex mt-8 mb-10 w-full flex-wrap">
