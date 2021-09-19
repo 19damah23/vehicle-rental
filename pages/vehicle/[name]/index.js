@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Navbar from '../../../../components/Navbar'
 import Card from '../../../../components/Card'
 import Footer from '../../../../components/Footer'
-import backendApi from '../../../api/backendApi'
+import backendApi from '../../api/backendApi'
 import { useRouter } from 'next/router'
 import { requireAuthentication } from '../../../HOC/requireAuthentication/requireAuthentication'
 
