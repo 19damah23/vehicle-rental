@@ -117,4 +117,4 @@ npm run dev
 ## Contact
 My Email : muchamadagush@gmail.com
 
-Project Link: [https://github.com/19damah23/zwallet](https://github.com/19damah23/zwallet)
+Project Link: [https://github.com/19damah23/vehicle-rental](https://github.com/19damah23/vehicle-rental)
