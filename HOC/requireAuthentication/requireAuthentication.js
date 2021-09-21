@@ -4,7 +4,7 @@ export function requireAuthentication (gssp) {
   return async (context) => {
     const { token, role } = cookies(context)
 
-    if (!token && !role && role !== 'member') {
+    if (!token || !role || role !== 'member') {
       return {
         redirect: {
           destination: '/login',
@@ -21,7 +21,7 @@ export function requireAuthenticationAdmin (gssp) {
   return async (context) => {
     const { token, role } = cookies(context)
 
-    if (!token && !role && role !== 'admin') {
+    if (!token || !role || role !== 'admin') {
       return {
         redirect: {
           destination: '/login',
