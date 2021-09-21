@@ -3,9 +3,9 @@ import cookies from 'next-cookies'
 export function requireAuthentication (gssp) {
   return async (context) => {
     const { token, role } = cookies(context)
-    console.log(role, 'member')
 
-    if (!token || role !== 'member') {
+    // eslint-disable-next-line eqeqeq
+    if (!token || role != 'member') {
       return {
         redirect: {
           destination: '/login',
@@ -21,9 +21,9 @@ export function requireAuthentication (gssp) {
 export function requireAuthenticationAdmin (gssp) {
   return async (context) => {
     const { token, role } = cookies(context)
-    console.log(role, 'admin')
 
-    if (!token || role !== 'admin') {
+    // eslint-disable-next-line eqeqeq
+    if (!token || role != 'admin') {
       return {
         redirect: {
           destination: '/login',
