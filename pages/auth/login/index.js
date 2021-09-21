@@ -7,6 +7,7 @@ import InputAuth from '../../../components/InputAuth'
 import backendApi from '../../api/backendApi'
 import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/router'
+import { requireAuthenticationAuth } from '../../../HOC/requireAuthentication/requireAuthentication'
 
 const Login = () => {
   const router = useRouter()
@@ -75,12 +76,12 @@ const Login = () => {
               giveClass="px-4 mt-4 lg:mt-9"
               actionChange={handleChange}
             />
-            <p className="fontMulish text-white lg:text-2xl font-bold mt-2 mb-8 lg:mt-3 lg:mb-12">
+            {/* <p className="fontMulish text-white lg:text-2xl font-bold mt-2 mb-8 lg:mt-3 lg:mb-12">
               Forgot password?
-            </p>
+            </p> */}
             <ButtonAuth
               title="Login"
-              giveClass="bg-yellow-400 hover:bg-yellow-500 font-black text-2xl"
+              giveClass="bg-yellow-400 hover:bg-yellow-500 font-black text-2xl mt-8 lg:mb-12"
               action={handleSubmit}
             />
             <ButtonAuth
@@ -103,3 +104,11 @@ const Login = () => {
 }
 
 export default Login
+
+export const getServerSideProps = requireAuthenticationAuth(
+  async (ctx) => {
+    return {
+      props: {}
+    }
+  }
+)

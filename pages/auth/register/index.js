@@ -7,6 +7,7 @@ import backendApi from '../../api/backendApi'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/router'
+import { requireAuthenticationAuth } from '../../../HOC/requireAuthentication/requireAuthentication'
 
 const Register = () => {
   const router = useRouter()
@@ -146,3 +147,11 @@ const Register = () => {
 }
 
 export default Register
+
+export const getServerSideProps = requireAuthenticationAuth(
+  async (ctx) => {
+    return {
+      props: {}
+    }
+  }
+)
