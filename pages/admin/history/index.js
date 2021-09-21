@@ -8,7 +8,7 @@ import Navbar from '../../../components/Navbar'
 import Dropdown from '../../../components/Dropdown'
 import Card from '../../../components/Card'
 import backendApi from '../../api/backendApi'
-import { requireAuthentication } from '../../../HOC/requireAuthentication/requireAuthentication'
+import { requireAuthenticationAdmin } from '../../../HOC/requireAuthentication/requireAuthentication'
 
 const History = () => {
   const [data, setData] = useState([])
@@ -118,7 +118,7 @@ const History = () => {
 
 export default History
 
-export const getServerSideProps = requireAuthentication(
+export const getServerSideProps = requireAuthenticationAdmin(
   async (ctx) => {
     return {
       props: {}

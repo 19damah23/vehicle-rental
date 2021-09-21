@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { confirmAlert } from 'react-confirm-alert'
 import Footer from '../../../components/Footer'
 import 'react-confirm-alert/src/react-confirm-alert.css'
+import { requireAuthenticationAdmin } from '../../../HOC/requireAuthentication/requireAuthentication'
 
 const EditVehicle = ({ dataType }) => {
   const { query } = useRouter()
@@ -260,7 +261,9 @@ const EditVehicle = ({ dataType }) => {
   )
 }
 
-export async function getServerSideProps () {
+export default EditVehicle
+
+export const getServerSideProps = requireAuthenticationAdmin(async (ctx) => {
   const type = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/category`)
   const dataType = await type.json()
 
@@ -269,6 +272,4 @@ export async function getServerSideProps () {
       dataType
     }
   }
-}
-
-export default EditVehicle
+})

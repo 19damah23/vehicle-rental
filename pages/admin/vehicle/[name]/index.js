@@ -7,7 +7,7 @@ import Card from '../../../../components/Card'
 import Footer from '../../../../components/Footer'
 import backendApi from '../../../api/backendApi'
 import { useRouter } from 'next/router'
-import { requireAuthentication } from '../../../../HOC/requireAuthentication/requireAuthentication'
+import { requireAuthentication, requireAuthenticationAdmin } from '../../../../HOC/requireAuthentication/requireAuthentication'
 
 const Vehicle = () => {
   const { query } = useRouter()
@@ -89,7 +89,7 @@ const Vehicle = () => {
 
 export default Vehicle
 
-export const getServerSideProps = requireAuthentication(async (ctx) => {
+export const getServerSideProps = requireAuthenticationAdmin(async (ctx) => {
   return {
     props: {}
   }

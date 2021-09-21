@@ -8,7 +8,7 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import cookies from 'next-cookies'
 import { useRouter } from 'next/router'
-import { requireAuthentication } from '../../../HOC/requireAuthentication/requireAuthentication'
+import { requireAuthenticationAdmin } from '../../../HOC/requireAuthentication/requireAuthentication'
 import backendApi from '../../api/backendApi'
 
 const Payment = ({ data }, req) => {
@@ -127,7 +127,7 @@ const Payment = ({ data }, req) => {
 
 export default Payment
 
-export const getServerSideProps = requireAuthentication(async (ctx) => {
+export const getServerSideProps = requireAuthenticationAdmin(async (ctx) => {
   const cookie = cookies(ctx).token
 
   const vehicle = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/transactions/${ctx.params.id}`, {

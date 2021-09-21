@@ -6,6 +6,7 @@ import Navbar from '../../../components/Navbar'
 import Card from '../../../components/Card'
 import Footer from '../../../components/Footer'
 import backendApi from '../../api/backendApi'
+import { requireAuthenticationAdmin } from '../../../HOC/requireAuthentication/requireAuthentication'
 
 const Vehicle = ({ data }) => {
   const [query, setQuery] = useState('')
@@ -129,13 +130,13 @@ const Vehicle = ({ data }) => {
   )
 }
 
-export async function getServerSideProps () {
+export default Vehicle
+
+export const getServerSideProps = requireAuthenticationAdmin(async (ctx) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/vehicles/grouped`
   )
   const data = await res.json()
 
   return { props: data }
-}
-
-export default Vehicle
+})

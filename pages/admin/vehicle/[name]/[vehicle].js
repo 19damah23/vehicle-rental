@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import Navbar from '../../../../components/Navbar'
 import Footer from '../../../../components/Footer'
 import backendApi from '../../../api/backendApi'
+import { requireAuthenticationAdmin } from '../../../../HOC/requireAuthentication/requireAuthentication'
 
 const Vehicle = () => {
   const { query } = useRouter()
@@ -79,3 +80,9 @@ const Vehicle = () => {
 }
 
 export default Vehicle
+
+export const getServerSideProps = requireAuthenticationAdmin(async (ctx) => {
+  return {
+    props: {}
+  }
+})
