@@ -8,6 +8,7 @@ import Navbar from '../../../components/Navbar'
 import Dropdown from '../../../components/Dropdown'
 import Card from '../../../components/Card'
 import backendApi from '../../api/backendApi'
+import { requireAuthentication } from '../../../HOC/requireAuthentication/requireAuthentication'
 
 const History = () => {
   const [data, setData] = useState([])
@@ -15,7 +16,7 @@ const History = () => {
   const [perPage, setPerPage] = useState(3)
   const [page, setPage] = useState(1)
   const [orderBy, setOrderBy] = useState('category')
-  const [sort, setSort] = useState('ASC')
+  const [sort, setSort] = useState('DESC')
   const [query, setQuery] = useState('')
 
   useEffect(() => {
@@ -63,7 +64,7 @@ const History = () => {
                 <Image src="/search.png" alt="search" width="30px" height="30px" />
               </div>
             </div>
-            <Dropdown list={[{ title: 'category' }, { title: 'name' }]} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md text-black bg-white border text-sm lg:text-base focus:outline-none lg:mr-4 h-16 w-60" handleChange={handleOrder} />
+            <Dropdown list={[{ title: 'category' }, { title: 'name' }]} titleClass="font-bold text-sm lg:text-base" classSelect="rounded-md text-black bg-white border text-sm lg:text-base focus:outline-none lg:mr-4 h-9 lg:h-16 w-60" handleChange={handleOrder} />
           </div>
 
           <div className="flex flex-col py-8 lg:py-16">
@@ -116,3 +117,11 @@ const History = () => {
 }
 
 export default History
+
+export const getServerSideProps = requireAuthentication(
+  async (ctx) => {
+    return {
+      props: {}
+    }
+  }
+)
