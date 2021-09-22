@@ -14,7 +14,7 @@ const Vehicle = () => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    backendApi.get(`vehicles/${id}`)
+    backendApi.get(`vehicles/vehicle/${id}`)
       .then((res) => {
         setData(res.data.data)
       })
