@@ -99,8 +99,8 @@ const Vehicle = ({ data }, req) => {
 
               <div className="flex flex-col mt-12">
                 <h5 className="font-bold">Reservation Date :</h5>
-                <input type="date" name="date" className="max-w-sm h-12 lg:h-20 bg-gray-200 rounded-md mt-7 px-6 focus:outline-none text-gray-400" onChange={handleInput} />
-                <input type="number" name="days" min="1" placeholder="Days" className="max-w-sm h-12 lg:h-20 bg-gray-200 rounded-md mt-7 px-6 focus:outline-none text-gray-400" value={form.days} onChange={handleInput} />
+                <input type="date" name="date" className="w-full lg:w-96 h-12 lg:h-20 bg-gray-200 rounded-md mt-7 px-6 focus:outline-none text-gray-400" onChange={handleInput} />
+                <input type="number" name="days" min="1" placeholder="Days" className="w-full lg:w-96 h-12 lg:h-20 bg-gray-200 rounded-md mt-7 px-6 focus:outline-none text-gray-400" value={form.days} onChange={handleInput} />
               </div>
             </div>
           </div>
