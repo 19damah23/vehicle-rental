@@ -1,5 +1,23 @@
 import cookies from 'next-cookies'
 
+export function requireAuthenticationHome (gssp) {
+  return async (context) => {
+    const { token } = cookies(context)
+
+    // eslint-disable-next-line eqeqeq
+    if (!token) {
+      return {
+        redirect: {
+          destination: '/login',
+          statusCode: 302
+        }
+      }
+    }
+
+    return await gssp(context)
+  }
+}
+
 export function requireAuthentication (gssp) {
   return async (context) => {
     const { token, role } = cookies(context)

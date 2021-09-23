@@ -2,13 +2,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import cookies from 'next-cookies'
-import { useContext } from 'react'
 import Dropdown from '../../components/Dropdown'
 import Navbar from '../../components/Navbar'
 import Star from '../../components/Star'
 import Card from '../../components/Card'
 import Footer from '../../components/Footer'
-import { requireAuthentication } from '../../HOC/requireAuthentication/requireAuthentication'
+import { requireAuthenticationHome } from '../../HOC/requireAuthentication/requireAuthentication'
 
 const Home = ({ dataVehicle, dataType, dataLocation }, ctx) => {
   const { role } = cookies(ctx)
@@ -102,7 +101,7 @@ const Home = ({ dataVehicle, dataType, dataLocation }, ctx) => {
 
 export default Home
 
-export const getServerSideProps = requireAuthentication(
+export const getServerSideProps = requireAuthenticationHome(
   async (ctx) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/vehicles?perPage=4`)
     const dataVehicle = await res.json()
