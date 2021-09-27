@@ -110,7 +110,7 @@ npm run dev
     <img width="350" src="./screenshots/screenshots6.png">
 </div>
 <div align="center">
-    <img width="350" src="./screenshots/screenshots7.png">   
+    <img width="350" src="./screenshots/screenshots.png">   
     <img width="350" src="./screenshots/screenshots8.png">
 </div>
 
