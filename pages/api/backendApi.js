@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export default axios.create({
-  baseURL: 'http://13.229.122.192:8000/v1/'
+  baseURL: 'http://vehicle-api.iamagus.com/v1/'
 })
