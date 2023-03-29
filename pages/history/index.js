@@ -74,7 +74,7 @@ const History = (context) => {
             {data && data.map((item) => (
               <div className="flex flex-row mt-6 lg:mt-10">
                 <div className="w-32 h-16 lg:w-52 lg:h-40 object-coverrounded-md">
-                  <Image src={`http://vehicle-api.iamagus.com/files/${item.images}`} alt="vehicle" width="200" height="165" className="rounded-2xl" />
+                  <Image src={`https://vehicle-api.iamagus.com/files/${item.images}`} alt="vehicle" width="200" height="165" className="rounded-2xl" />
                 </div>
                 <div className="flex flex-col justify-center ml-8 lg:ml-16">
                   <p className="text-base lg:text-2xl font-normal">{item.name}</p>

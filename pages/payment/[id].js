@@ -28,7 +28,7 @@ const Payment = ({ data }, req) => {
   const handleSubmit = (id) => {
     backendApi.patch(`transactions/${id}`, form, {
       withCredentials: true,
-      origin: ['http://vehicle-api.iamagus.com']
+      origin: ['https://vehicle-api.iamagus.com']
     })
       .then(() => {
         toast.success('Transaction in process!', { position: toast.POSITION.TOP_CENTER })
@@ -59,7 +59,7 @@ const Payment = ({ data }, req) => {
           <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-12 flex flex-col lg:flex-row">
             <div className="w-full lg:w-1/3 lg:mr-12">
               <div className="w-400 object-contain h-315">
-                <img src={`http://vehicle-api.iamagus.com/files/${item.image}`} alt={item.vehicle} className="object-cover w-full h-full rounded-md" />
+                <img src={`https://vehicle-api.iamagus.com/files/${item.image}`} alt={item.vehicle} className="object-cover w-full h-full rounded-md" />
               </div>
             </div>
             <div className="w-full lg:w-2/3 flex flex-col">

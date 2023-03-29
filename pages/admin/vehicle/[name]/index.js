@@ -21,7 +21,7 @@ const Vehicle = () => {
   useEffect(() => {
     backendApi.get(`vehicles/${query.name}?page=${page}&orderBy=${orderBy}&perPage=${perPage}&sortBy=${sort}`, {
       withCredentials: true,
-      origin: ['http://vehicle-api.iamagus.com']
+      origin: ['https://vehicle-api.iamagus.com']
     })
       .then((res) => {
         const { meta } = res.data
@@ -63,7 +63,7 @@ const Vehicle = () => {
           {data && data.map((item, index) => (
             <Link href={`/admin/vehicle/${item.name}/${item.id}`}>
               <a className="mx-3 lg:mx-0 lg:mr-3">
-                <Card name={item.name} location={item.location} img={`http://vehicle-api.iamagus.com/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
+                <Card name={item.name} location={item.location} img={`https://vehicle-api.iamagus.com/files/${item.images[0]}`} giveClass="w-1/2 lg:w-1/4 my-4" index={index} />
               </a>
             </Link>
           ))}

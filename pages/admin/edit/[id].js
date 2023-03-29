@@ -174,7 +174,7 @@ const EditVehicle = ({ dataType }) => {
                     )
                   : input.oldImage
                     ? (
-                  <img src={`http://vehicle-api.iamagus.com/files/${input.oldImage[0]}`} alt="camera" className="w-full h-full rounded-md" />
+                  <img src={`https://vehicle-api.iamagus.com/files/${input.oldImage[0]}`} alt="camera" className="w-full h-full rounded-md" />
                       )
                     : (
                   <label htmlFor="images" className="flex items-center flex-col">

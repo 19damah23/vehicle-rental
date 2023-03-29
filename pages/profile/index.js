@@ -72,13 +72,13 @@ const Profile = ({ data }, context) => {
     backendApi
       .patch(`users/${userId}`, data, {
         withCredentials: true,
-        origin: ['http://vehicle-api.iamagus.com']
+        origin: ['https://vehicle-api.iamagus.com']
       })
       .then((res) => {
         backendApi
           .get(`users/${userId}`, {
             withCredentials: true,
-            origin: ['http://vehicle-api.iamagus.com']
+            origin: ['https://vehicle-api.iamagus.com']
           })
           .then((res) => {
             const { data } = res.data
@@ -137,7 +137,7 @@ const Profile = ({ data }, context) => {
               <Image
                 src={
                   profile.avatar !== null
-                    ? `http://vehicle-api.iamagus.com/files/${profile.avatar}`
+                    ? `https://vehicle-api.iamagus.com/files/${profile.avatar}`
                     : '/people.png'
                 }
                 alt="people"
