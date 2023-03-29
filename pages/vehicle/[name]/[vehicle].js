@@ -48,7 +48,7 @@ const Vehicle = ({ data }, req) => {
     e.preventDefault()
     backendApi.post('transactions', form, {
       withCredentials: true,
-      origin: ['https://vehicle.muchamadagushermawan.online']
+      origin: ['http://13.229.122.192:8000']
     })
       .then((res) => {
         toast.success('Transaction success!', { position: toast.POSITION.TOP_CENTER })
@@ -79,7 +79,7 @@ const Vehicle = ({ data }, req) => {
           <div className="xs:container sm:container md:container lg:container xl:container mx-auto mt-16 flex flex-col lg:flex-row">
             <div className="w-full lg:w-2/3 mx-auto">
               <div className="w-696 object-contain h-616">
-                <img src={`https://vehicle.muchamadagushermawan.online/files/${item.images[0]}`} alt={item.name} className="object-cover w-full h-full rounded-md" />
+                <img src={`http://13.229.122.192:8000/files/${item.images[0]}`} alt={item.name} className="object-cover w-full h-full rounded-md" />
               </div>
             </div>
             <div className="w-full lg:w-1/3 flex flex-col">

@@ -72,13 +72,13 @@ const Profile = ({ data }, context) => {
     backendApi
       .patch(`users/${userId}`, data, {
         withCredentials: true,
-        origin: ['https://vehicle.muchamadagushermawan.online']
+        origin: ['http://13.229.122.192:8000']
       })
       .then((res) => {
         backendApi
           .get(`users/${userId}`, {
             withCredentials: true,
-            origin: ['https://vehicle.muchamadagushermawan.online']
+            origin: ['http://13.229.122.192:8000']
           })
           .then((res) => {
             const { data } = res.data
@@ -137,7 +137,7 @@ const Profile = ({ data }, context) => {
               <Image
                 src={
                   profile.avatar !== null
-                    ? `https://vehicle.muchamadagushermawan.online/files/${profile.avatar}`
+                    ? `http://13.229.122.192:8000/files/${profile.avatar}`
                     : '/people.png'
                 }
                 alt="people"

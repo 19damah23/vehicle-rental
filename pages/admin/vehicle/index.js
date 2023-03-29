@@ -61,7 +61,7 @@ const Vehicle = ({ data }) => {
                   <Card
                     name={item.name}
                     location={item.location}
-                    img={`https://vehicle.muchamadagushermawan.online/files/${item.images[0]}`}
+                    img={`http://13.229.122.192:8000/files/${item.images[0]}`}
                     giveClass="w-1/2 lg:w-1/4 my-4"
                     index={index}
                   />
@@ -112,7 +112,7 @@ const Vehicle = ({ data }) => {
                         <Card
                           name={item.name}
                           location={item.location}
-                          img={`https://vehicle.muchamadagushermawan.online/files/${item.images[0]}`}
+                          img={`http://13.229.122.192:8000/files/${item.images[0]}`}
                           giveClass="w-1/2 lg:w-1/4 my-4"
                           index={item.id}
                         />
