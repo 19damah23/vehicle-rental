@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['localhost:8000']
+    domains: ['localhost:8000', 'vehicle-api.iamagus.com']
   },
   reactStrictMode: true,
   async rewrites () {

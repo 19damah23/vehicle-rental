@@ -8,6 +8,7 @@ import backendApi from '../../api/backendApi'
 import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/router'
 import { requireAuthenticationAuth } from '../../../HOC/requireAuthentication/requireAuthentication'
+import Cookies from 'js-cookie'
 
 const Login = () => {
   const router = useRouter()
@@ -27,11 +28,36 @@ const Login = () => {
   const handleSubmit = () => {
     backendApi
       .post('auth/login', form, { withCredentials: true })
-      .then(() => {
+      .then((res) => {
+        Cookies.set('token', res.data.token, {
+          expires: 7200000,
+          secure: true,
+          path: '/',
+          sameSite: 'none'
+        })
+        Cookies.set('userId', res.data.user.id, {
+          expires: 7200000,
+          secure: true,
+          path: '/',
+          sameSite: 'none'
+        })
+        Cookies.set('role', res.data.user.role, {
+          expires: 7200000,
+          secure: true,
+          path: '/',
+          sameSite: 'none'
+        })
+        Cookies.set('isAuth', true, {
+          expires: 7200000,
+          secure: true,
+          path: '/',
+          sameSite: 'none'
+        })
+
         router.push('/')
       })
       .catch((error) => {
-        toast.error(error.response.data.message, {
+        toast.error(error.response?.data?.message, {
           position: toast.POSITION.TOP_CENTER
         })
       })

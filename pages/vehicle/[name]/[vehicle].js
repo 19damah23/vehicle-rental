@@ -15,7 +15,7 @@ const Vehicle = ({ data }, req) => {
   const router = useRouter()
   const { userId } = cookies(req)
   const [form, setForm] = useState({
-    vehiclesId: data.data[0].id,
+    vehiclesId: data?.data[0].id,
     userId,
     qty: 1,
     days: 1,
@@ -121,7 +121,7 @@ export default Vehicle
 export const getServerSideProps = requireAuthentication(async (ctx) => {
   const id = ctx.params.vehicle
 
-  const vehicle = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/vehicles/vehicle/${id}`)
+  const vehicle = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_ENV}v1/vehicles/${id}`)
   const data = await vehicle.json()
 
   return {
