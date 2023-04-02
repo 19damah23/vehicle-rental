@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import backendApi from '../pages/api/backendApi'
+import Cookies from 'js-cookie'
 
 const Navbar = (ctx, { profile }) => {
   const { userId, role } = cookies(ctx)
@@ -27,15 +28,37 @@ const Navbar = (ctx, { profile }) => {
   }, [profile])
 
   const logout = () => {
+    Cookies.remove('token', {
+      secure: true,
+      path: '/',
+      sameSite: 'none'
+    })
+    Cookies.remove('userId', {
+      secure: true,
+      path: '/',
+      sameSite: 'none'
+    })
+    Cookies.remove('role', {
+      secure: true,
+      path: '/',
+      sameSite: 'none'
+    })
+    Cookies.remove('isAuth', {
+      secure: true,
+      path: '/',
+      sameSite: 'none'
+    })
     backendApi.get('auth/logout', {
-      withCredentials: true
+      withCredentials: true,
+      origin: ['https://vehicle-api.iamagus.com']
     })
       .then((res) => {
-        router.push('/login')
+        
       })
       .catch((error) => {
         console.log(error.response)
       })
+      router.push('/login')
   }
 
   return (
